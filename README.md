@@ -1,4 +1,4 @@
-# DJS11 - PODCAST APP | PORTFOLIO PIECE
+# 🎵 PODCAST APP | PORTFOLIO PIECE 💿
 
 ## Getting Started with Create React App
 

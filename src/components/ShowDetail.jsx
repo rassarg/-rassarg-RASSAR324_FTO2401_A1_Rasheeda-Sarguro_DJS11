@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { usePlayer } from "../usePlayer";
 
 const ShowDetail = () => {
   const { showId } = useParams();
   const [show, setShow] = useState(null);
+  const { playEpisode } = usePlayer();
+  const [selectedEpisode, setSelectedEpisode] = useState(null);
 
   useEffect(() => {
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
@@ -11,6 +14,11 @@ const ShowDetail = () => {
       .then((data) => setShow(data))
       .catch((error) => console.error("Error fetching show details:", error));
   }, [showId]);
+
+  const handlePlayClick = (episode) => {
+    playEpisode(episode);
+    setSelectedEpisode(episode.episode);
+  };
 
   if (!show) {
     return <div>Loading...</div>;
@@ -25,16 +33,22 @@ const ShowDetail = () => {
         {show.seasons.map((season) => (
           <li key={season.season}>
             <h3>{season.title}</h3>
-            <img src={season.image} alt={season.title} />
+            <img
+              src={season.image}
+              alt={season.title}
+              style={{ width: "200px" }}
+            />
             <ul>
               {season.episodes.map((episode) => (
                 <li key={episode.episode}>
                   <h4>{episode.title}</h4>
                   <p>{episode.description}</p>
-                  <audio controls>
-                    <source src={episode.file} type="audio/mp3" />
-                    Your browser does not support the audio element.
-                  </audio>
+                  <button
+                    onClick={() => handlePlayClick(episode)}
+                    disabled={selectedEpisode === episode.episode}
+                  >
+                    {selectedEpisode === episode.episode ? "Playing" : "Play"}
+                  </button>
                 </li>
               ))}
             </ul>

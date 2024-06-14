@@ -1,4 +1,6 @@
+// Home.jsx
 import React, { useState, useEffect } from "react";
+import "./Home.css"; // Import the CSS file for styling
 
 const Home = () => {
   const [shows, setShows] = useState([]);
@@ -11,7 +13,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="home-container">
       <h1>Podcasts</h1>
       <ul>
         {shows.map((show) => (

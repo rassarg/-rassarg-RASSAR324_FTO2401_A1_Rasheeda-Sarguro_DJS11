@@ -8,6 +8,8 @@ export const PlayerProvider = ({ children }) => {
     return savedEpisode ? JSON.parse(savedEpisode) : null;
   });
 
+  const [episodes, setEpisodes] = useState([]); // Add episodes state
+
   const playEpisode = (episode) => {
     setCurrentEpisode(episode);
     localStorage.setItem("currentEpisode", JSON.stringify(episode));
@@ -23,6 +25,8 @@ export const PlayerProvider = ({ children }) => {
   const value = {
     currentEpisode,
     playEpisode,
+    episodes, // Include episodes in the context value
+    setEpisodes, // Include setEpisodes in the context value
   };
 
   return (

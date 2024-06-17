@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { usePlayer } from "../usePlayer";
 
 const ShowDetail = () => {
   const { showId } = useParams();
+  const { playEpisode, setEpisodes } = usePlayer();
   const [show, setShow] = useState(null);
-  const { playEpisode } = usePlayer();
   const [selectedEpisode, setSelectedEpisode] = useState(null);
 
   useEffect(() => {
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
       .then((response) => response.json())
-      .then((data) => setShow(data))
+      .then((data) => {
+        setShow(data);
+        setEpisodes(data.seasons);
+      })
       .catch((error) => console.error("Error fetching show details:", error));
-  }, [showId]);
+  }, [showId, setEpisodes]);
 
   const handlePlayClick = (episode) => {
     playEpisode(episode);

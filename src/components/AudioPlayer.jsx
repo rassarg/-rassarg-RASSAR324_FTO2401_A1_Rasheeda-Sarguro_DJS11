@@ -3,18 +3,23 @@ import { usePlayer } from "../usePlayer";
 import "./AudioPlayer.css";
 
 const AudioPlayer = () => {
-  const { currentEpisode } = usePlayer();
+  const { currentEpisode, handlePlayEpisode } = usePlayer();
   const audioRef = useRef(null);
 
   useEffect(() => {
     if (audioRef.current && currentEpisode) {
       audioRef.current.pause();
       audioRef.current.load();
+    }
+  }, [currentEpisode]);
+
+  const handlePlay = () => {
+    if (audioRef.current && currentEpisode) {
       audioRef.current.play().catch((error) => {
         console.log("Autoplay prevented: user interaction required");
       });
     }
-  }, [currentEpisode]);
+  };
 
   return (
     <div className="audio-player">

@@ -68,15 +68,18 @@ const ShowDetail = () => {
           <ol className="episodes-list">
             {selectedSeason.episodes.map((episode) => (
               <li key={episode.episode} className="episode-item">
-                <h4 className="episode-title">Episode: {episode.title}</h4>
+                <h4 className="episode-title">
+                  Episode: {episode.episode} - {episode.title}
+                </h4>
                 <p className="episode-description">{episode.description}</p>
                 <button
                   className="play-button"
                   onClick={() => handlePlayClick(episode)}
+                  disabled={selectedEpisode === episode.episode}
                 >
                   {selectedEpisode === episode.episode
                     ? "Currently Selected"
-                    : "Select"}
+                    : "Select this episode"}
                 </button>
               </li>
             ))}

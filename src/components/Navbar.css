@@ -46,6 +46,7 @@
 
 .nav-link .tooltip::after {
   content: "";
+  visibility: hidden;
   position: absolute;
   top: 100%;
   left: 50%;

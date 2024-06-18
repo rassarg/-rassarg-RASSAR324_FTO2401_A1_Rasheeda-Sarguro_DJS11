@@ -1,37 +1,60 @@
-/* ShowDetail.css */
-.show-detail {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+.show-container {
+  outline: black;
+  border: 1px solid #000000;
+  max-width: fit-content;
 }
 
-.show-detail h1 {
-  font-size: 1.5em; /* Reduce the heading size */
-  margin-bottom: 10px;
+.show-title {
+  position: relative;
 }
 
-.show-detail p {
-  font-size: 1em; /* Reduce the paragraph font size */
-  margin-bottom: 10px; /* Reduce the margin */
+.show-description {
+  outline: black;
+  border: 1px solid #000000;
+  margin-top: 10px;
 }
 
-/* Define a grid for the seasons */
-.seasons-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(250px, 1fr)
-  ); /* Responsive grid with minimum item width of 250px */
-  gap: 20px; /* Add some gap between grid items */
+.seasons-title {
 }
 
-.seasons-grid-item {
-  border: 1px solid #ddd; /* Add borders to grid items */
-  padding: 10px;
+.seasons-list {
+  /* Styles for the seasons list */
 }
 
-/* Reduce the size of the image */
-.show-detail img {
-  max-width: 100%;
+.season-item {
+  /* Styles for each season item */
+}
+
+.season-title {
+  /* Styles for each season title */
+}
+
+.season-image {
+  width: 100%;
   height: auto;
+  display: block;
+}
+
+.episodes-list {
+  /* Styles for the episodes list */
+}
+
+.episode-item {
+  /* Styles for each episode item */
+}
+
+.episode-title {
+  /* Styles for each episode title */
+}
+
+.episode-description {
+  /* Styles for each episode description */
+}
+
+.play-button {
+  cursor: pointer;
+}
+
+.loading {
+  /* Styles for the loading message */
 }

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Home = ({ shows }) => {
   return (
     <div className="home-container">
-      <h1>Podcasts</h1>
+      {/* <h1>Podcasts</h1> */}
       <ul className="home-list">
         {shows.map((show) => (
           <li key={show.id} className="home-list-item">

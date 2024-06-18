@@ -9,7 +9,11 @@
   width: 100%;
   z-index: 999;
 }
-
+h1 {
+  padding: 0;
+  margin: 0;
+  font-size: large;
+}
 .nav-link {
   color: white;
   margin: 0 15px;

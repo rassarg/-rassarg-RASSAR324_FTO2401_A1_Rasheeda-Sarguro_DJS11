@@ -17,10 +17,3 @@ export const usePlayer = () => {
     playEpisode,
   };
 };
-
-/* Defines a custom hook that allows components to access and
-interact with the player state.
-It uses the useContext hook to access the player context
-and provides functions like handlePlayEpisode to play episodes.
-This file encapsulates the player logic and provides a clean interface
-for components to use. */

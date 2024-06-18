@@ -41,14 +41,22 @@ const ShowDetail = () => {
     <div className="show-container">
       <h1 className="show-title">{show.title}</h1>
       <p className="show-description">{show.description}</p>
-      <h2 className="seasons-title">Seasons</h2>
-      <select className="season-dropdown" onChange={handleSeasonChange}>
+      <h2 className="seasons-title"></h2>
+      <select
+        className="season-dropdown"
+        onChange={handleSeasonChange}
+        value={selectedSeason ? show.seasons.indexOf(selectedSeason) : ""}
+      >
+        <option value="" disabled>
+          Select a season
+        </option>
         {show.seasons.map((season, index) => (
           <option key={season.season} value={index}>
             {season.title}
           </option>
         ))}
       </select>
+
       {selectedSeason && (
         <div className="season-detail">
           <h3 className="season-title">{selectedSeason.title}</h3>
@@ -57,10 +65,10 @@ const ShowDetail = () => {
             src={selectedSeason.image}
             alt={selectedSeason.title}
           />
-          <ul className="episodes-list">
+          <ol className="episodes-list">
             {selectedSeason.episodes.map((episode) => (
               <li key={episode.episode} className="episode-item">
-                <h4 className="episode-title">{episode.title}</h4>
+                <h4 className="episode-title">Episode: {episode.title}</h4>
                 <p className="episode-description">{episode.description}</p>
                 <button
                   className="play-button"
@@ -72,7 +80,7 @@ const ShowDetail = () => {
                 </button>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       )}
     </div>

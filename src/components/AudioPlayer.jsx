@@ -24,8 +24,9 @@ const AudioPlayer = () => {
   return (
     <div className="audio-player">
       <h2 className="audio-player-title">
-        {currentEpisode ? "Currently selected:" : ""}
+        {currentEpisode ? `Now playing: Episode ${currentEpisode.episode}` : ""}
       </h2>
+
       {currentEpisode ? (
         <div className="audio-player-current">
           <p>{currentEpisode.title}</p>

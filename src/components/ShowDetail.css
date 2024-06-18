@@ -3,17 +3,24 @@
   border: 1px solid #000000;
   max-width: fit-content;
   padding: 10px;
+  margin-bottom: 200px;
 }
 
 .show-title {
   position: relative;
+  padding-top: 20px;
 }
 
 .show-description {
   margin-top: 10px;
 }
 
-.seasons-title {
+.seasons-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 0;
 }
 
 .seasons-list {
@@ -25,29 +32,32 @@
 }
 
 .season-title {
-  /* Styles for each season title */
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .season-image {
-  width: 50%;
-  height: auto;
-  display: block;
+  width: 35%;
+  height: 50%;
+  display: inline-block;
 }
 
 .episodes-list {
-  /* Styles for the episodes list */
-}
-
-.episode-item {
-  /* Styles for each episode item */
+  list-style: none;
 }
 
 .episode-title {
-  /* Styles for each episode title */
+  font-size: larger;
+}
+
+.episode-item li {
+  margin-right: 15px;
+}
+
+.episode-item h4 {
 }
 
 .episode-description {
-  /* Styles for each episode description */
 }
 
 .play-button {

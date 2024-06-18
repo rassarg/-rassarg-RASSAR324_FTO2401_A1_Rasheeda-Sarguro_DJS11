@@ -1,12 +1,13 @@
 .navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   background-color: #333;
   padding: 10px;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 999;
 }
 
 .nav-link {
@@ -16,24 +17,27 @@
   position: relative;
   display: flex;
   align-items: center;
+  padding: 8px 15px;
 }
 
 .nav-link:hover .tooltip {
   visibility: visible;
   opacity: 1;
+  margin-top: 100px;
+  padding: 5px 20px;
+  font-size: larger;
 }
 
 .nav-link .tooltip {
   visibility: hidden;
   opacity: 0;
   width: 60px;
-  background-color: black;
+  background-color: #333;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
   position: absolute;
-  bottom: 125%;
+  bottom: 0%;
   left: 50%;
   transform: translateX(-50%);
   transition: opacity 0.3s;

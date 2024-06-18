@@ -9,9 +9,11 @@ export const PlayerProvider = ({ children }) => {
   });
 
   const [episodes, setEpisodes] = useState([]);
+  const [currentShowTitle, setCurrentShowTitle] = useState("");
 
   const playEpisode = (episode) => {
     setCurrentEpisode(episode);
+    setCurrentShowTitle;
     localStorage.setItem("currentEpisode", JSON.stringify(episode));
   };
 
@@ -20,15 +22,11 @@ export const PlayerProvider = ({ children }) => {
     playEpisode,
     episodes,
     setEpisodes,
+    currentShowTitle,
+    setCurrentShowTitle,
   };
 
   return (
     <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>
   );
 };
-
-/* Defines the context for player state using createContext from React
-It provides a PlayerProvider component that wraps the application and
-manages the player state using the useState hook.
-This file is responsible for providing the player state to the rest of the application
-through the context. */

@@ -6,16 +6,35 @@ import Favourites from "./components/Favourites";
 import Navbar from "./components/Navbar";
 import AudioPlayer from "./components/AudioPlayer";
 import { PlayerProvider } from "./components/PlayerContext";
+import "./App.css";
 
 function App() {
   const [shows, setShows] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/")
       .then((response) => response.json())
-      .then((data) => setShows(data))
-      .catch((error) => console.error("Error fetching shows:", error));
+      .then((data) => {
+        setShows(data);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000); // Intentionally show loading spinner for 1 second
+      })
+      .catch((error) => {
+        console.error("Error fetching shows:", error);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="spinner-container">
+        Loading...
+        <div className="spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>

@@ -5,10 +5,12 @@ import "./ShowDetail.css";
 
 const ShowDetail = () => {
   const { showId } = useParams();
-  const { playEpisode, setEpisodes } = usePlayer();
+  const { playEpisode, setEpisodes, updateShows } = usePlayer();
   const [show, setShow] = useState(null);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [selectedSeason, setSelectedSeason] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
@@ -16,12 +18,20 @@ const ShowDetail = () => {
       .then((data) => {
         setShow(data);
         setEpisodes(data.seasons);
+        updateShows(data);
         if (data.seasons.length > 0) {
           setSelectedSeason(data.seasons[0]);
         }
+        setLoading(false);
       })
-      .catch((error) => console.error("Error fetching show details:", error));
-  }, [showId, setEpisodes]);
+      .catch((error) => {
+        console.error("Error fetching show details:", error);
+        setError(
+          "An error occurred while fetching the show details. Please try again later."
+        );
+        setLoading(false);
+      });
+  }, [showId, setEpisodes, updateShows]);
 
   const handlePlayClick = (episode) => {
     playEpisode(episode);
@@ -33,8 +43,16 @@ const ShowDetail = () => {
     setSelectedSeason(show.seasons[seasonIndex]);
   };
 
-  if (!show) {
+  if (loading) {
     return <div className="loading">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
+
+  if (!show) {
+    return <div className="loading">No show found.</div>;
   }
 
   return (
@@ -91,10 +109,3 @@ const ShowDetail = () => {
 };
 
 export default ShowDetail;
-
-/* Component responsible for displaying the details of a podcast show,
-including its seasons and episodes.
-It uses the usePlayer hook to access the player state
-and functions to play episodes.
-This component focuses on the presentation of show details and
-interacts with the player through the usePlayer hook */

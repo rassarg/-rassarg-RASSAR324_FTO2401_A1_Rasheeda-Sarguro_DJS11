@@ -3,7 +3,7 @@ import { usePlayer } from "../usePlayer";
 import "./AudioPlayer.css";
 
 const AudioPlayer = () => {
-  const { currentEpisode, handlePlayEpisode } = usePlayer();
+  const { currentEpisode, handlePlayEpisode, show } = usePlayer(); // Add show to destructuring
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -24,7 +24,9 @@ const AudioPlayer = () => {
   return (
     <div className="audio-player">
       <h2 className="audio-player-title">
-        {currentEpisode ? `Now playing: Episode ${currentEpisode.episode}` : ""}
+        {currentEpisode && show // Check if currentEpisode and show are both available
+          ? `${show.title} - Episode ${currentEpisode.episode}`
+          : ""}
       </h2>
 
       {currentEpisode ? (
@@ -43,7 +45,3 @@ const AudioPlayer = () => {
 };
 
 export default AudioPlayer;
-/* Component responsible for displaying the audio player interface.
-It uses the usePlayer hook to access the current episode and play episodes.
-This component focuses on the presentation and functionality of the audio player
-and interacts with the player through the usePlayer hook. */

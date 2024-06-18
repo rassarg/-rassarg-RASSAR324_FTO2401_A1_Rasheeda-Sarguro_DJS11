@@ -10,11 +10,16 @@ export const PlayerProvider = ({ children }) => {
 
   const [episodes, setEpisodes] = useState([]);
   const [currentShowTitle, setCurrentShowTitle] = useState("");
+  const [show, setShow] = useState(null); // Add show state
 
   const playEpisode = (episode) => {
     setCurrentEpisode(episode);
-    setCurrentShowTitle;
+    setCurrentShowTitle(episode.showTitle);
     localStorage.setItem("currentEpisode", JSON.stringify(episode));
+  };
+
+  const updateShows = (data) => {
+    setShow(data); // Update the show state
   };
 
   const value = {
@@ -24,6 +29,8 @@ export const PlayerProvider = ({ children }) => {
     setEpisodes,
     currentShowTitle,
     setCurrentShowTitle,
+    show, // Include show in the context value
+    updateShows, // Add updateShows function
   };
 
   return (

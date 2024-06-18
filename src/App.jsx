@@ -11,6 +11,7 @@ import "./App.css";
 function App() {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // Add error state
 
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/")
@@ -23,6 +24,9 @@ function App() {
       })
       .catch((error) => {
         console.error("Error fetching shows:", error);
+        setError(
+          "An error occurred while fetching the shows. Please try again later."
+        );
         setLoading(false);
       });
   }, []);
@@ -34,6 +38,10 @@ function App() {
         <div className="spinner"></div>
       </div>
     );
+  }
+
+  if (error) {
+    return <div className="error">{error}</div>;
   }
 
   return (

@@ -2,6 +2,7 @@
   outline: black;
   border: 1px solid #000000;
   max-width: fit-content;
+  padding: 10px;
 }
 
 .show-title {
@@ -9,8 +10,6 @@
 }
 
 .show-description {
-  outline: black;
-  border: 1px solid #000000;
   margin-top: 10px;
 }
 
@@ -30,7 +29,7 @@
 }
 
 .season-image {
-  width: 100%;
+  width: 50%;
   height: auto;
   display: block;
 }

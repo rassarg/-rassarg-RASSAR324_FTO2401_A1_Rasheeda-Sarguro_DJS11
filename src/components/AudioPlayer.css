@@ -2,10 +2,27 @@
 .audio-player {
   position: fixed;
   bottom: 0;
-  background-color: #ef2424;
+  background-color: #ea3232;
   color: white;
-  padding: 10px;
+  padding: 5px;
   width: 100%;
   text-align: center;
-  z-index: 999;
+  left: 0;
+  right: 0;
+  height: fit-content;
+}
+
+.audio-player-title {
+  /* Styles for the audio player title */
+}
+
+.audio-player-current {
+}
+
+.audio-player-element {
+  /* Styles for the audio element */
+}
+
+.audio-player-select-episode {
+  /* Styles for the select an episode message */
 }

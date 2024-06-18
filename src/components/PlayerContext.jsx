@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 
 export const PlayerContext = createContext();
 
@@ -8,28 +8,27 @@ export const PlayerProvider = ({ children }) => {
     return savedEpisode ? JSON.parse(savedEpisode) : null;
   });
 
-  const [episodes, setEpisodes] = useState([]); // Add episodes state
+  const [episodes, setEpisodes] = useState([]);
 
   const playEpisode = (episode) => {
     setCurrentEpisode(episode);
     localStorage.setItem("currentEpisode", JSON.stringify(episode));
   };
 
-  useEffect(() => {
-    const savedEpisode = localStorage.getItem("currentEpisode");
-    if (savedEpisode) {
-      setCurrentEpisode(JSON.parse(savedEpisode));
-    }
-  }, []);
-
   const value = {
     currentEpisode,
     playEpisode,
-    episodes, // Include episodes in the context value
-    setEpisodes, // Include setEpisodes in the context value
+    episodes,
+    setEpisodes,
   };
 
   return (
     <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>
   );
 };
+
+/* Defines the context for player state using createContext from React
+It provides a PlayerProvider component that wraps the application and
+manages the player state using the useState hook.
+This file is responsible for providing the player state to the rest of the application
+through the context. */

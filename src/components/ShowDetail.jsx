@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { usePlayer } from "../usePlayer";
-import "./ShowDetail.css"; // Import your custom CSS file
+import "./ShowDetail.css";
 
 const ShowDetail = () => {
   const { showId } = useParams();
@@ -80,3 +80,10 @@ const ShowDetail = () => {
 };
 
 export default ShowDetail;
+
+/* Component responsible for displaying the details of a podcast show,
+including its seasons and episodes.
+It uses the usePlayer hook to access the player state
+and functions to play episodes.
+This component focuses on the presentation of show details and
+interacts with the player through the usePlayer hook */

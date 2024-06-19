@@ -32,6 +32,7 @@ const ShowDetail = () => {
 
   const handleSeasonChange = (season) => {
     setSelectedSeason(season);
+    setClickedButtonIndex(null);
   };
 
   const handleButtonClick = (episode, show, season, index) => {

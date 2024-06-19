@@ -5,18 +5,16 @@ import { fetchPreviews, genreMapping } from "../utils/api";
 
 const Home = () => {
   const [shows, setShows] = useState([]);
-  const [filteredShows, setFilteredShows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [titleFilter, setTitleFilter] = useState("");
+  const [filter, setFilter] = useState("");
+  const [genre, setGenre] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchPreviews();
         setShows(data);
-        setFilteredShows(data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching previews:", error);
@@ -30,38 +28,29 @@ const Home = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const filterShows = () => {
-      let filtered = shows;
-
-      if (selectedGenre) {
-        filtered = filtered.filter((show) =>
-          show.genres.includes(Number(selectedGenre))
-        );
-      }
-
-      if (titleFilter) {
-        filtered = filtered.filter((show) =>
-          show.title.toLowerCase().includes(titleFilter.toLowerCase())
-        );
-      }
-
-      setFilteredShows(filtered);
-    };
-
-    filterShows();
-  }, [selectedGenre, titleFilter, shows]);
-
-  const handleGenreChange = (event) => {
-    setSelectedGenre(event.target.value);
+  const handleGenreChange = (e) => {
+    setGenre(e.target.value);
   };
 
-  const handleTitleChange = (event) => {
-    setTitleFilter(event.target.value);
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
   };
+
+  const filteredShows = shows.filter((show) => {
+    const matchesGenre = genre ? show.genres.includes(parseInt(genre)) : true;
+    const matchesTitle = show.title
+      .toLowerCase()
+      .includes(filter.toLowerCase());
+    return matchesGenre && matchesTitle;
+  });
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return (
+      <div className="loading">
+        <div>Loading...</div>
+        <div className="loading-spinner"></div>
+      </div>
+    );
   }
 
   if (error) {
@@ -72,27 +61,27 @@ const Home = () => {
     <div className="home-container">
       <h1>Podcasts</h1>
       <div className="filter-container">
-        <label htmlFor="genre-filter">Filter by genre:</label>
-        <select
-          id="genre-filter"
-          value={selectedGenre}
-          onChange={handleGenreChange}
-        >
-          <option value="">All Genres</option>
-          {Object.entries(genreMapping).map(([id, name]) => (
-            <option key={id} value={id}>
-              {name}
-            </option>
-          ))}
-        </select>
-        <label htmlFor="title-filter">Filter by title:</label>
-        <input
-          type="text"
-          id="title-filter"
-          value={titleFilter}
-          onChange={handleTitleChange}
-          placeholder="Enter title"
-        />
+        <div>
+          <label htmlFor="genre">Filter by Genre:</label>
+          <select id="genre" value={genre} onChange={handleGenreChange}>
+            <option value="">All Genres</option>
+            {Object.entries(genreMapping).map(([id, name]) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="filter">Filter by Title:</label>
+          <input
+            id="filter"
+            type="text"
+            value={filter}
+            onChange={handleFilterChange}
+            placeholder="Search by title..."
+          />
+        </div>
       </div>
       <ul className="home-list">
         {filteredShows.map((show) => (
@@ -104,15 +93,10 @@ const Home = () => {
                 {show.genres.map((genreId) => genreMapping[genreId]).join(", ")}
               </span>
               <span className="show-seasons">
-                Seasons: {show.seasons ? show.seasons.length : 0}
+                Seasons: {show.seasons.length}
               </span>
               <span className="show-updated">
-                Last updated:{" "}
-                {new Date(show.updated).toLocaleDateString("en-UK", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
+                Last updated: {new Date(show.updated).toLocaleDateString()}
               </span>
             </NavLink>
           </li>

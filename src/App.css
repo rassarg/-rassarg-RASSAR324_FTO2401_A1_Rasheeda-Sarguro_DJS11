@@ -3,10 +3,7 @@
   margin: 0;
   text-align: center;
 }
-.app-container {
-  position: relative;
-  padding-top: 50px;
-}
+
 .spinner-container {
   display: flex;
   justify-content: center;

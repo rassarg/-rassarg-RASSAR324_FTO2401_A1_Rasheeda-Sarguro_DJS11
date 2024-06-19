@@ -37,10 +37,14 @@
   text-underline-offset: 3px;
 }
 
-.season-image {
+.season-detail img {
   width: 35%;
   height: 50%;
   display: inline-block;
+  outline: black;
+  border: 2px solid #b23e3e;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .episodes-list {

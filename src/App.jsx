@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import ShowDetail from "./components/ShowDetail";
@@ -8,28 +8,41 @@ import AudioPlayer from "./components/AudioPlayer";
 import { PlayerProvider } from "./components/PlayerContext";
 import "./App.css";
 
+// memoization
+const useMemoizedComponent = (Component) => {
+  return React.memo(Component);
+};
+
+// Memoized components
+const MemoizedHome = useMemoizedComponent(Home);
+const MemoizedShowDetail = useMemoizedComponent(ShowDetail);
+const MemoizedFavourites = useMemoizedComponent(Favourites);
+
 function App() {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // Add error state
+  const [error, setError] = useState(null);
+
+  const fetchShows = useCallback(async () => {
+    try {
+      const response = await fetch("https://podcast-api.netlify.app/");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setShows(data);
+      setLoading(false);
+    } catch (error) {
+      setError(
+        "An error occurred while fetching the shows. Please try again later."
+      );
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    fetch("https://podcast-api.netlify.app/")
-      .then((response) => response.json())
-      .then((data) => {
-        setShows(data);
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000); // Intentionally show loading spinner for 1 second
-      })
-      .catch((error) => {
-        console.error("Error fetching shows:", error);
-        setError(
-          "An error occurred while fetching the shows. Please try again later."
-        );
-        setLoading(false);
-      });
-  }, []);
+    fetchShows();
+  }, [fetchShows]);
 
   return (
     <BrowserRouter>
@@ -46,12 +59,12 @@ function App() {
             <div className="error">{error}</div>
           ) : (
             <Routes>
-              <Route path="/" element={<Home shows={shows} />} />
+              <Route path="/" element={<MemoizedHome shows={shows} />} />
               <Route
                 path="/show/:showId"
-                element={<ShowDetail shows={shows} />}
+                element={<MemoizedShowDetail shows={shows} />}
               />
-              <Route path="/favourites" element={<Favourites />} />
+              <Route path="/favourites" element={<MemoizedFavourites />} />
             </Routes>
           )}
         </div>

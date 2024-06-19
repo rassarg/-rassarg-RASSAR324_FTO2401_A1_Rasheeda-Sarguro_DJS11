@@ -6,6 +6,8 @@
   /* padding: 10px; */
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   z-index: 999;
 }
@@ -59,4 +61,13 @@ navbar h1 {
   border-width: 5px;
   border-style: solid;
   border-color: black transparent transparent transparent;
+}
+
+@media (max-width: 425px) {
+  .navbar {
+    width: auto;
+  }
+  .navbar h1 {
+    font-size: 1em;
+  }
 }

@@ -9,6 +9,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [titleFilter, setTitleFilter] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,17 +31,33 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedGenre) {
-      setFilteredShows(
-        shows.filter((show) => show.genres.includes(Number(selectedGenre)))
-      );
-    } else {
-      setFilteredShows(shows);
-    }
-  }, [selectedGenre, shows]);
+    const filterShows = () => {
+      let filtered = shows;
+
+      if (selectedGenre) {
+        filtered = filtered.filter((show) =>
+          show.genres.includes(Number(selectedGenre))
+        );
+      }
+
+      if (titleFilter) {
+        filtered = filtered.filter((show) =>
+          show.title.toLowerCase().includes(titleFilter.toLowerCase())
+        );
+      }
+
+      setFilteredShows(filtered);
+    };
+
+    filterShows();
+  }, [selectedGenre, titleFilter, shows]);
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
+  };
+
+  const handleTitleChange = (event) => {
+    setTitleFilter(event.target.value);
   };
 
   if (loading) {
@@ -55,7 +72,7 @@ const Home = () => {
     <div className="home-container">
       <h1>Podcasts</h1>
       <div className="filter-container">
-        <label htmlFor="genre-filter">Filter by genre: </label>
+        <label htmlFor="genre-filter"></label>
         <select
           id="genre-filter"
           value={selectedGenre}
@@ -68,6 +85,14 @@ const Home = () => {
             </option>
           ))}
         </select>
+        <label htmlFor="title-filter"></label>
+        <input
+          type="text"
+          id="title-filter"
+          value={titleFilter}
+          onChange={handleTitleChange}
+          placeholder="Enter title"
+        />
       </div>
       <ul className="home-list">
         {filteredShows.map((show) => (

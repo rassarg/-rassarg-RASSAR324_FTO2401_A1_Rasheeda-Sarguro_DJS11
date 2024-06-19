@@ -80,7 +80,9 @@ const ShowDetail = () => {
         <h2 className="episodes-heading">Episodes:</h2>
         {selectedSeason.episodes.map((episode, index) => (
           <div key={`${selectedSeason.season}-${index}`} className="episode">
-            <h3>{episode.title}</h3>
+            <h3>
+              {episode.episode}. {episode.title}
+            </h3>
             <button
               className={`episode-play-button ${
                 clickedButton === index ? "clicked" : ""

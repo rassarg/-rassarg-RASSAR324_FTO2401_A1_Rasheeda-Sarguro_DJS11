@@ -4,7 +4,6 @@ import Loading from "./Loading";
 import "./Player.css";
 
 const Player = () => {
-  // Destructure values from the player context
   const { audioRef, currentEpisode, currentShow, currentSeason, loading } =
     usePlayer();
 
@@ -23,7 +22,9 @@ const Player = () => {
                 className="player-image"
               />
               <div>
-                <h3>{currentEpisode.title}</h3>
+                <h3>
+                  Episode {currentEpisode.episode}: {currentEpisode.title}
+                </h3>
                 <p>{currentShow.title}</p>
                 {currentSeason && <p>Season {currentSeason.season}</p>}
               </div>

@@ -49,10 +49,9 @@
   .player-details {
     font-size: 10px;
   }
-  /* player-image {
-    width: 25px;
-    height: 25px;
-  } */
+  player-image {
+    display: none;
+  }
   .player-details h3 {
     font-size: 10px;
   }

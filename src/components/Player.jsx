@@ -12,7 +12,7 @@ const Player = () => {
           <audio ref={audioRef} controls />
           <div className="player-details">
             <img
-              src={currentShow.image}
+              src={currentSeason ? currentSeason.image : currentShow.image}
               alt={currentShow.title}
               className="player-image"
             />

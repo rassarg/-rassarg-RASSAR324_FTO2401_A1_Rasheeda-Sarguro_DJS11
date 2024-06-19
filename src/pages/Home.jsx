@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { NavLink } from "react-router-dom";
 import { fetchPreviews, genreMapping } from "../utils/api";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const [shows, setShows] = useState([]);
@@ -67,12 +68,7 @@ const Home = () => {
   );
 
   if (loading) {
-    return (
-      <div className="loading">
-        <div>Loading...</div>
-        <div className="loading-spinner"></div>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (error) {

@@ -9,17 +9,19 @@ const Player = () => {
     <div className="player">
       {currentEpisode ? (
         <>
-          <audio ref={audioRef} controls />
-          <div className="player-details">
-            <img
-              src={currentSeason ? currentSeason.image : currentShow.image}
-              alt={currentShow.title}
-              className="player-image"
-            />
-            <div>
-              <h3>{currentEpisode.title}</h3>
-              <p>{currentShow.title}</p>
-              {currentSeason && <p>Season {currentSeason.season}</p>}
+          <div className="audio-container">
+            <audio ref={audioRef} controls />
+            <div className="player-details">
+              <img
+                src={currentSeason ? currentSeason.image : currentShow.image}
+                alt={currentShow.title}
+                className="player-image"
+              />
+              <div>
+                <h3>{currentEpisode.title}</h3>
+                <p>{currentShow.title}</p>
+                {currentSeason && <p>Season {currentSeason.season}</p>}
+              </div>
             </div>
           </div>
         </>

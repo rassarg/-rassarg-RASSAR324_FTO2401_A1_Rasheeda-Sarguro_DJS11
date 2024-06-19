@@ -77,7 +77,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1>Podcasts</h1>
+      <h1>All Podcasts</h1>
       <div className="filter-container">
         <div>
           <label htmlFor="filter"></label>
@@ -85,7 +85,7 @@ const Home = () => {
             id="filter"
             value={filter}
             onChange={handleFilterChange}
-            placeholder="Search titles"
+            placeholder="Search titles..."
             rows="1"
             style={{ resize: "none" }} // Prevent the textarea from being resized by the user
           />

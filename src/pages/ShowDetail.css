@@ -2,6 +2,7 @@
   max-width: auto;
   margin: 0 auto;
   padding: 20px;
+  margin-bottom: 100px;
 }
 
 .show-details h1 {
@@ -69,8 +70,7 @@
   gap: 20px;
   list-style-type: none;
   padding: 20px;
-
-  margin-bottom: 90px;
+  margin-bottom: 190px;
 }
 
 .episode-list .episode button {
@@ -137,7 +137,7 @@
   .episode-list {
     gap: 2px;
     padding: 2px;
-    margin-bottom: 120px;
+    /* margin-bottom: 120px; */
   }
   .episode {
     margin: 2px 0;

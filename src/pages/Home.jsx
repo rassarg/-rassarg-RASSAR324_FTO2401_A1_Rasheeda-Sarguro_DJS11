@@ -47,6 +47,10 @@ const Home = () => {
         return a.title.localeCompare(b.title);
       } else if (sortOrder === "Z-A") {
         return b.title.localeCompare(a.title);
+      } else if (sortOrder === "Newest") {
+        return new Date(b.updated) - new Date(a.updated);
+      } else if (sortOrder === "Oldest") {
+        return new Date(a.updated) - new Date(b.updated);
       }
       return 0;
     });
@@ -91,7 +95,7 @@ const Home = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="filter">Filter by Title:</label>
+          <label htmlFor="filter">Find a podcast:</label>
           <input
             id="filter"
             type="text"
@@ -101,14 +105,16 @@ const Home = () => {
           />
         </div>
         <div>
-          <label htmlFor="sortOrder">Sort Title:</label>
+          <label htmlFor="sortOrder">Sort by:</label>
           <select
             id="sortOrder"
             value={sortOrder}
             onChange={handleSortOrderChange}
           >
-            <option value="A-Z">A-Z</option>
-            <option value="Z-A">Z-A</option>
+            <option value="A-Z">Title: A-Z</option>
+            <option value="Z-A">Title: Z-A</option>
+            <option value="Newest">Newest</option>
+            <option value="Oldest">Oldest</option>
           </select>
         </div>
       </div>
@@ -125,7 +131,12 @@ const Home = () => {
                 Seasons: {show.seasons.length}
               </span>
               <span className="show-updated">
-                Last updated: {new Date(show.updated).toLocaleDateString()}
+                Last updated:{" "}
+                {new Date(show.updated).toLocaleDateString("en-ZA", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
               </span>
             </NavLink>
           </li>

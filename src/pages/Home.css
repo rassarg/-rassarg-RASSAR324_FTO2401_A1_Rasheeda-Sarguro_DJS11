@@ -40,6 +40,18 @@
   height: auto;
 }
 
+.show-title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.show-genre {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #555;
+}
+
 a {
   text-decoration: none;
   color: #333;

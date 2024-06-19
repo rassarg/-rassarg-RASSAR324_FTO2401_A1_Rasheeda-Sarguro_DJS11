@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { usePlayer } from "../usePlayer";
+// import { usePlayer } from "../utils/usePlayer";
 import "./ShowDetail.css";
 
 const ShowDetail = () => {
   const { showId } = useParams();
-  const { playEpisode, setEpisodes, updateShows } = usePlayer();
+  // const { playEpisode, setEpisodes, updateShows } = usePlayer();
   const [show, setShow] = useState(null);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [selectedSeason, setSelectedSeason] = useState(null);

@@ -1,13 +1,17 @@
 import React from "react";
 import { usePlayer } from "./PlayerContext";
+import Loading from "./Loading";
 import "./Player.css";
 
 const Player = () => {
-  const { audioRef, currentEpisode, currentShow, currentSeason } = usePlayer();
+  const { audioRef, currentEpisode, currentShow, currentSeason, loading } =
+    usePlayer();
 
   return (
     <div className="player">
-      {currentEpisode ? (
+      {loading ? (
+        <Loading />
+      ) : currentEpisode ? (
         <>
           <div className="audio-container">
             <audio ref={audioRef} controls />

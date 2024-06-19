@@ -15,6 +15,7 @@ export const usePlayer = () => {
 export const PlayerProvider = ({ children }) => {
   const [currentEpisode, setCurrentEpisode] = useState(null);
   const [currentShow, setCurrentShow] = useState(null);
+  const [currentSeason, setCurrentSeason] = useState(null);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -24,14 +25,16 @@ export const PlayerProvider = ({ children }) => {
     }
   }, [currentEpisode]);
 
-  const playEpisode = (episode, show) => {
+  const playEpisode = (episode, show, season) => {
     setCurrentEpisode(episode);
     setCurrentShow(show);
+    setCurrentSeason(season);
   };
 
   const value = {
     currentEpisode,
     currentShow,
+    currentSeason,
     playEpisode,
     audioRef,
   };

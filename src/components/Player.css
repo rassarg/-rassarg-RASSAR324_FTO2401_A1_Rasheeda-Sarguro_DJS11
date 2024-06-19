@@ -5,7 +5,7 @@
   right: 0;
   width: 100%;
   margin: 0;
-  background: #b23e3e;
+  background: #aa2504;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -35,6 +35,16 @@
   font-size: 14px;
   color: #eed7d7;
 }
+
+.select-podcast {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #eed7d7;
+  font-size: 16px;
+}
+
 @media screen and (max-width: 375px) {
   .player-details {
     font-size: 10px;

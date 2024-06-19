@@ -12,6 +12,9 @@ const ShowDetail = () => {
   const [loading, setLoading] = useState(true);
   const { playEpisode } = usePlayer();
 
+  const [clickedButtonIndex, setClickedButtonIndex] = useState(null);
+  const [clickedSeasonIndex, setClickedSeasonIndex] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,6 +34,14 @@ const ShowDetail = () => {
     setSelectedSeason(season);
   };
 
+  const handleButtonClick = (episode, show, season, index) => {
+    playEpisode(episode, show, season);
+    setClickedButtonIndex(index);
+  };
+  const handleSeasonButtonClick = (season, index) => {
+    setSelectedSeason(season);
+    setClickedSeasonIndex(index);
+  };
   if (loading) {
     return <Loading />;
   }
@@ -51,13 +62,15 @@ const ShowDetail = () => {
         )}
       </div>
       <div className="season-selector">
-        {show.seasons.map((season) => (
+        {show.seasons.map((season, index) => (
           <button
             key={`${show.id}-${season.season}`}
             onClick={() => handleSeasonChange(season)}
             className={season === selectedSeason ? "active" : "inactive"}
+            disabled={season === selectedSeason}
           >
-            Season {season.season}
+            Season {season.season}{" "}
+            {season === selectedSeason && "(currently selected)"}
           </button>
         ))}
       </div>
@@ -66,7 +79,16 @@ const ShowDetail = () => {
         {selectedSeason.episodes.map((episode, index) => (
           <div key={`${selectedSeason.season}-${index}`} className="episode">
             <h3>{episode.title}</h3>
-            <button onClick={() => playEpisode(episode, show)}>Play</button>
+            <button
+              className={`episode-play-button ${
+                clickedButtonIndex === index ? "clicked" : ""
+              }`}
+              onClick={() =>
+                handleButtonClick(episode, show, selectedSeason, index)
+              }
+            >
+              Play
+            </button>
           </div>
         ))}
       </div>

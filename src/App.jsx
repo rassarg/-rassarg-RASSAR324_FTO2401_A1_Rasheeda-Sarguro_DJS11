@@ -8,15 +8,10 @@ import Player from "./components/Player";
 import { PlayerProvider } from "./components/PlayerContext";
 import "./App.css";
 
-// memoization
-const useMemoizedComponent = (Component) => {
-  return React.memo(Component);
-};
-
 // Memoized components
-const MemoizedHome = useMemoizedComponent(Home);
-const MemoizedShowDetail = useMemoizedComponent(ShowDetail);
-const MemoizedFavourites = useMemoizedComponent(Favourites);
+const MemoizedHome = React.memo(Home);
+const MemoizedShowDetail = React.memo(ShowDetail);
+const MemoizedFavourites = React.memo(Favourites);
 
 function App() {
   return (

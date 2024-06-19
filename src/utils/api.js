@@ -1,3 +1,4 @@
+// Map of genre IDs to genre names
 export const genreMapping = {
   1: "Personal Growth",
   2: "Investigative Journalism",
@@ -10,10 +11,14 @@ export const genreMapping = {
   9: "Kids and Family",
 };
 
+// Object to store show data by ID
 let showsData = {};
+// Array to store preview data
 let previewsData = [];
+// Object to store genre data by ID
 let genreData = {};
 
+// Function to fetch show details by ID
 export const fetchShowById = async (id) => {
   try {
     const response = await fetch(`https://podcast-api.netlify.app/id/${id}`);
@@ -28,6 +33,7 @@ export const fetchShowById = async (id) => {
   }
 };
 
+// Function to fetch all previews
 export const fetchPreviews = async () => {
   try {
     const response = await fetch(`https://podcast-api.netlify.app`);
@@ -52,6 +58,7 @@ export const fetchPreviews = async () => {
   }
 };
 
+// Function to fetch genre details by ID
 export const fetchGenre = async (id) => {
   try {
     const response = await fetch(`https://podcast-api.netlify.app/genre/${id}`);

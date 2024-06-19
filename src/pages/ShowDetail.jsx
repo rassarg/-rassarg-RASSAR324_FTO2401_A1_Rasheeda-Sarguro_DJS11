@@ -7,14 +7,13 @@ import "./ShowDetail.css";
 
 const ShowDetail = () => {
   const { id } = useParams();
-  const [show, setShow] = useState(null);
+  const [show, setShow] = useState(null); // state for the show data
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { playEpisode } = usePlayer();
+  const { playEpisode } = usePlayer(); // Custom hook to access player functionality
+  const [clickedButton, setClickedButton] = useState(null); // state to track clicked button
 
-  const [clickedButtonIndex, setClickedButtonIndex] = useState(null);
-  const [clickedSeasonIndex, setClickedSeasonIndex] = useState(null);
-
+  // Fetch show data when component mounts or 'id' parameter changes
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,19 +29,18 @@ const ShowDetail = () => {
     fetchData();
   }, [id]);
 
+  // Handler function to change the selected season
   const handleSeasonChange = (season) => {
     setSelectedSeason(season);
-    setClickedButtonIndex(null);
+    setClickedButton(null);
   };
 
+  // Handler function to handle click on the "Play" button
   const handleButtonClick = (episode, show, season, index) => {
     playEpisode(episode, show, season);
-    setClickedButtonIndex(index);
+    setClickedButton(index);
   };
-  const handleSeasonButtonClick = (season, index) => {
-    setSelectedSeason(season);
-    setClickedSeasonIndex(index);
-  };
+
   if (loading) {
     return <Loading />;
   }
@@ -85,7 +83,7 @@ const ShowDetail = () => {
             <h3>{episode.title}</h3>
             <button
               className={`episode-play-button ${
-                clickedButtonIndex === index ? "clicked" : ""
+                clickedButton === index ? "clicked" : ""
               }`}
               onClick={() =>
                 handleButtonClick(episode, show, selectedSeason, index)

@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import "./Player.css";
 
 const Player = () => {
+  // Destructure values from the player context
   const { audioRef, currentEpisode, currentShow, currentSeason, loading } =
     usePlayer();
 

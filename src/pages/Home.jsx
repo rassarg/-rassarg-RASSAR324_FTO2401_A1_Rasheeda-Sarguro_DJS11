@@ -5,12 +5,12 @@ import { fetchPreviews, genreMapping } from "../utils/api";
 import Loading from "../components/Loading";
 
 const Home = () => {
-  const [shows, setShows] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [filter, setFilter] = useState("");
-  const [genre, setGenre] = useState("");
-  const [sortOrder, setSortOrder] = useState("A-Z");
+  const [shows, setShows] = useState([]); // State to store the fetched shows
+  const [loading, setLoading] = useState(true); // State to manage loading state
+  const [error, setError] = useState(null); // State for error messages
+  const [filter, setFilter] = useState(""); // State for filter text
+  const [genre, setGenre] = useState(""); // State for selected genre
+  const [sortOrder, setSortOrder] = useState("A-Z"); // State for the order sorting
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,36 +27,41 @@ const Home = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    fetchData(); // Call fetchData function
+  }, []); // Dependency array ensure effect runs only once on mount
 
+  // Event handler for genre filter change
   const handleGenreChange = (e) => {
     setGenre(e.target.value);
   };
 
+  // Event handler for text filter change
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
 
+  // Event handler for sort order change
   const handleSortOrderChange = (e) => {
     setSortOrder(e.target.value);
   };
 
+  // Function to sort shows based on sort order
   const getSortedShows = (shows) => {
     return shows.slice().sort((a, b) => {
       if (sortOrder === "A-Z") {
-        return a.title.localeCompare(b.title);
+        return a.title.localeCompare(b.title); // Sort by title A-Z
       } else if (sortOrder === "Z-A") {
-        return b.title.localeCompare(a.title);
+        return b.title.localeCompare(a.title); // Sort by title Z-A
       } else if (sortOrder === "Newest") {
-        return new Date(b.updated) - new Date(a.updated);
+        return new Date(b.updated) - new Date(a.updated); // Sort by newest
       } else if (sortOrder === "Oldest") {
-        return new Date(a.updated) - new Date(b.updated);
+        return new Date(a.updated) - new Date(b.updated); // Sort by oldest
       }
       return 0;
     });
   };
 
+  // Filter and sort the shows based on genre, filter, and sort order
   const filteredShows = getSortedShows(
     shows.filter((show) => {
       const matchesGenre = genre ? show.genres.includes(parseInt(genre)) : true;

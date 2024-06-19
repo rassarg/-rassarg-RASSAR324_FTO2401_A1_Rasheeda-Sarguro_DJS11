@@ -27,6 +27,14 @@ const ShowDetails = () => {
 
   const handleSeasonChange = (season) => {
     setSelectedSeason(season);
+    const buttons = document.querySelectorAll(".season-selector button");
+    buttons.forEach((button) => {
+      if (button.textContent === `Season ${season.season}`) {
+        button.classList.add("clicked");
+      } else {
+        button.classList.remove("clicked");
+      }
+    });
   };
 
   if (loading) {
@@ -53,7 +61,7 @@ const ShowDetails = () => {
           <button
             key={`${show.id}-${season.season}`} // Combine show ID and season number for unique keys
             onClick={() => handleSeasonChange(season)}
-            className={season === selectedSeason ? "active" : ""}
+            className={season === selectedSeason ? "active" : "inactive"}
           >
             Season {season.season}
           </button>

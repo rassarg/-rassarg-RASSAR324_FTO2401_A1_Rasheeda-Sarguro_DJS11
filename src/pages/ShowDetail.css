@@ -19,17 +19,28 @@
 }
 
 .season-selector button {
-  padding: 5px 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  padding: 5px 15px;
+  background-color: #eed7d7;
+  border: 2px solid #aa2504;
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
+  transition: 0.4s;
+  margin: 15px;
 }
-
+.season-selector button:hover {
+  background-color: #aa2504;
+  color: white;
+}
 .season-selector button.active {
   background-color: #bfbcbc;
   color: #333;
+  border: 2px solid #ffffff;
+  font-size: 12px;
+  cursor: not-allowed;
+}
+.season-selector button.inactive {
+  padding: 10px 20px;
 }
 
 .season-preview {

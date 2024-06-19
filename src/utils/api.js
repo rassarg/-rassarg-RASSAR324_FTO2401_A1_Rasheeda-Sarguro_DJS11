@@ -18,8 +18,7 @@ export const fetchShowById = async (id) => {
   try {
     const response = await fetch(`https://podcast-api.netlify.app/id/${id}`);
     const data = await response.json();
-    showsData = data;
-    // console.log(data);
+    showsData[id] = data;
     return data;
   } catch (error) {
     console.error("Error fetching show details:", error);
@@ -32,9 +31,14 @@ export const fetchShowById = async (id) => {
 export const fetchPreviews = async () => {
   try {
     const response = await fetch(`https://podcast-api.netlify.app`);
-    const data = await response.json();
-    previewsData = data.sort((a, b) => a.title.localeCompare(b.title)); // alphabetically sort data by title
-    // console.log(data);
+    const previews = await response.json();
+    previewsData = await Promise.all(
+      previews.map(async (preview) => {
+        const showDetails = await fetchShowById(preview.id);
+        return { ...preview, seasons: showDetails.seasons };
+      })
+    );
+    previewsData.sort((a, b) => a.title.localeCompare(b.title)); // alphabetically sort data by title
     return previewsData;
   } catch (error) {
     console.error("Error fetching previews:", error);
@@ -49,7 +53,6 @@ export const fetchGenre = async (id) => {
     const response = await fetch(`https://podcast-api.netlify.app/genre/${id}`);
     const data = await response.json();
     genreData[id] = data;
-    // console.log(data);
     return data;
   } catch (error) {
     console.error("Error fetching genre details:", error);

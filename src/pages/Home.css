@@ -52,6 +52,12 @@
   color: #555;
 }
 
+.show-seasons {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #3c3b3b;
+}
+
 a {
   text-decoration: none;
   color: #333;
@@ -77,6 +83,7 @@ a:hover {
   padding: 5px;
   border-radius: 5px;
 }
+
 .filter-container {
   margin-bottom: 20px;
   display: flex;

@@ -72,7 +72,7 @@ const Home = () => {
     <div className="home-container">
       <h1>Podcasts</h1>
       <div className="filter-container">
-        <label htmlFor="genre-filter"></label>
+        <label htmlFor="genre-filter">Filter by genre:</label>
         <select
           id="genre-filter"
           value={selectedGenre}
@@ -85,7 +85,7 @@ const Home = () => {
             </option>
           ))}
         </select>
-        <label htmlFor="title-filter"></label>
+        <label htmlFor="title-filter">Filter by title:</label>
         <input
           type="text"
           id="title-filter"
@@ -102,6 +102,9 @@ const Home = () => {
               <span className="show-title">{show.title}</span>
               <span className="show-genre">
                 {show.genres.map((genreId) => genreMapping[genreId]).join(", ")}
+              </span>
+              <span className="show-seasons">
+                {show.seasons ? show.seasons.length : 0} seasons
               </span>
             </NavLink>
           </li>

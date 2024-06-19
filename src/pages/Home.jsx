@@ -9,6 +9,7 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState("");
   const [genre, setGenre] = useState("");
+  const [sortOrder, setSortOrder] = useState("A-Z");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,13 +37,30 @@ const Home = () => {
     setFilter(e.target.value);
   };
 
-  const filteredShows = shows.filter((show) => {
-    const matchesGenre = genre ? show.genres.includes(parseInt(genre)) : true;
-    const matchesTitle = show.title
-      .toLowerCase()
-      .includes(filter.toLowerCase());
-    return matchesGenre && matchesTitle;
-  });
+  const handleSortOrderChange = (e) => {
+    setSortOrder(e.target.value);
+  };
+
+  const getSortedShows = (shows) => {
+    return shows.slice().sort((a, b) => {
+      if (sortOrder === "A-Z") {
+        return a.title.localeCompare(b.title);
+      } else if (sortOrder === "Z-A") {
+        return b.title.localeCompare(a.title);
+      }
+      return 0;
+    });
+  };
+
+  const filteredShows = getSortedShows(
+    shows.filter((show) => {
+      const matchesGenre = genre ? show.genres.includes(parseInt(genre)) : true;
+      const matchesTitle = show.title
+        .toLowerCase()
+        .includes(filter.toLowerCase());
+      return matchesGenre && matchesTitle;
+    })
+  );
 
   if (loading) {
     return (
@@ -81,6 +99,17 @@ const Home = () => {
             onChange={handleFilterChange}
             placeholder="Search by title..."
           />
+        </div>
+        <div>
+          <label htmlFor="sortOrder">Sort Title:</label>
+          <select
+            id="sortOrder"
+            value={sortOrder}
+            onChange={handleSortOrderChange}
+          >
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
+          </select>
         </div>
       </div>
       <ul className="home-list">

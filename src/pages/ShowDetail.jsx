@@ -44,14 +44,14 @@ const ShowDetails = () => {
         {selectedSeason && (
           <img
             src={selectedSeason.image}
-            alt={`Season ${selectedSeason.number}`}
+            alt={`Season ${selectedSeason.season}`}
           />
         )}
       </div>
       <div className="season-selector">
         {show.seasons.map((season) => (
           <button
-            key={season.id}
+            key={`${show.id}-${season.season}`} // Combine show ID and season number for unique keys
             onClick={() => handleSeasonChange(season)}
             className={season === selectedSeason ? "active" : ""}
           >
@@ -60,8 +60,9 @@ const ShowDetails = () => {
         ))}
       </div>
       <div className="episode-list">
-        {selectedSeason.episodes.map((episode) => (
-          <div key={episode.id} className="episode">
+        <h2 className="episodes-heading">Episodes:</h2>
+        {selectedSeason.episodes.map((episode, index) => (
+          <div key={`${selectedSeason.season}-${index}`} className="episode">
             <h3>{episode.title}</h3>
             <audio controls>
               <source src={episode.file} type="audio/mpeg" />

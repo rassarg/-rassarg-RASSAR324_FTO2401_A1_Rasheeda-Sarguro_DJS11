@@ -51,15 +51,18 @@ const ShowDetail = () => {
 
   return (
     <div className="show-details">
-      <h1>{show.title}</h1>
-
-      <div className="season-preview">
-        {selectedSeason && (
-          <img
-            src={selectedSeason.image}
-            alt={`Season ${selectedSeason.season}`}
-          />
-        )}
+      <h1 className="show-title">{show.title}</h1>
+      <div className="show-info">
+        <div className="image-container">
+          {selectedSeason && (
+            <img
+              src={selectedSeason.image}
+              alt={`Season ${selectedSeason.season}`}
+              className="season-image"
+            />
+          )}
+        </div>
+        <p className="show-description">{show.description}</p>
       </div>
       <div className="season-selector">
         {show.seasons.map((season, index) => (

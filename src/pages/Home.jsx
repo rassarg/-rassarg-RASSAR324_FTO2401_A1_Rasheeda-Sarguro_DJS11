@@ -123,13 +123,13 @@ const Home = () => {
             <NavLink to={`/show/${show.id}`} className="a">
               <img className="season-image" src={show.image} alt={show.title} />
               <h3 className="show-title">{show.title}</h3>
-              <span className="show-genre">
-                <strong>Genre: </strong>
-                {show.genres.map((genreId) => genreMapping[genreId]).join(", ")}
-              </span>
               <span className="show-seasons">
                 <strong>Seasons: </strong>
                 {show.seasons.length}
+              </span>
+              <span className="show-genre">
+                <strong>Genre: </strong>
+                {show.genres.map((genreId) => genreMapping[genreId]).join(", ")}
               </span>
               <span className="show-updated">
                 <strong>Last updated: </strong>{" "}

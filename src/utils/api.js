@@ -66,7 +66,6 @@ export const fetchGenre = async (id) => {
   }
 };
 
-// Exporting fetched data
 export const { title, description, seasons } = showsData;
 export const previews = previewsData;
 export const genres = genreData;

@@ -41,4 +41,4 @@ The Podcast App is a React-based application designed for podcast enthusiasts. I
 
 Name: Rasheeda Sarguro <br>
 Email: raskieda@gmail.com <br>
-GitHub: rassar
+GitHub: [rassarg](https://github.com/rassarg)

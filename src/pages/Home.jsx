@@ -80,7 +80,19 @@ const Home = () => {
       <h1>Podcasts</h1>
       <div className="filter-container">
         <div>
-          <label htmlFor="genre">Filter by Genre:</label>
+          <label htmlFor="filter"></label>
+          <textarea
+            id="filter"
+            value={filter}
+            onChange={handleFilterChange}
+            placeholder="Search titles"
+            rows="1"
+            style={{ resize: "none" }} // Prevent the textarea from being resized by the user
+          />
+        </div>
+
+        <div>
+          <label htmlFor="genre"></label>
           <select id="genre" value={genre} onChange={handleGenreChange}>
             <option value="">All Genres</option>
             {Object.entries(genreMapping).map(([id, name]) => (
@@ -90,25 +102,16 @@ const Home = () => {
             ))}
           </select>
         </div>
+
         <div>
-          <label htmlFor="filter">Find a podcast:</label>
-          <input
-            id="filter"
-            type="text"
-            value={filter}
-            onChange={handleFilterChange}
-            placeholder="Search by title..."
-          />
-        </div>
-        <div>
-          <label htmlFor="sortOrder">Sort by:</label>
+          <label htmlFor="sortOrder"></label>
           <select
             id="sortOrder"
             value={sortOrder}
             onChange={handleSortOrderChange}
           >
-            <option value="A-Z">Title: A-Z</option>
-            <option value="Z-A">Title: Z-A</option>
+            <option value="A-Z">Sort by Title: A-Z</option>
+            <option value="Z-A">Sort by Title: Z-A</option>
             <option value="Newest">Newest</option>
             <option value="Oldest">Oldest</option>
           </select>
@@ -119,15 +122,17 @@ const Home = () => {
           <li key={show.id} className="home-list-item">
             <NavLink to={`/show/${show.id}`} className="a">
               <img className="season-image" src={show.image} alt={show.title} />
-              <span className="show-title">{show.title}</span>
+              <h3 className="show-title">{show.title}</h3>
               <span className="show-genre">
+                <strong>Genre: </strong>
                 {show.genres.map((genreId) => genreMapping[genreId]).join(", ")}
               </span>
               <span className="show-seasons">
-                Seasons: {show.seasons.length}
+                <strong>Seasons: </strong>
+                {show.seasons.length}
               </span>
               <span className="show-updated">
-                Last updated:{" "}
+                <strong>Last updated: </strong>{" "}
                 {new Date(show.updated).toLocaleDateString("en-ZA", {
                   year: "numeric",
                   month: "short",

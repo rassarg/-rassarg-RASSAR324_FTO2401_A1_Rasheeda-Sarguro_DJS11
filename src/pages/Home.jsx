@@ -104,7 +104,15 @@ const Home = () => {
                 {show.genres.map((genreId) => genreMapping[genreId]).join(", ")}
               </span>
               <span className="show-seasons">
-                {show.seasons ? show.seasons.length : 0} seasons
+                Seasons: {show.seasons ? show.seasons.length : 0}
+              </span>
+              <span className="show-updated">
+                Last updated:{" "}
+                {new Date(show.updated).toLocaleDateString("en-UK", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
               </span>
             </NavLink>
           </li>

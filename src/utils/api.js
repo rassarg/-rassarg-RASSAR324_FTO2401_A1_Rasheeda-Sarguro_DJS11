@@ -35,7 +35,11 @@ export const fetchPreviews = async () => {
     previewsData = await Promise.all(
       previews.map(async (preview) => {
         const showDetails = await fetchShowById(preview.id);
-        return { ...preview, seasons: showDetails.seasons };
+        return {
+          ...preview,
+          seasons: showDetails.seasons,
+          updated: showDetails.updated,
+        };
       })
     );
     previewsData.sort((a, b) => a.title.localeCompare(b.title)); // alphabetically sort data by title

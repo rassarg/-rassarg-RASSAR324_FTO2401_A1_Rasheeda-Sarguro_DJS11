@@ -1,39 +1,42 @@
-// import React, { createContext, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
 
-// export const PlayerContext = createContext();
+const PlayerContext = createContext();
 
-// export const PlayerProvider = ({ children }) => {
-//   const [currentEpisode, setCurrentEpisode] = useState(() => {
-//     const savedEpisode = localStorage.getItem("currentEpisode");
-//     return savedEpisode ? JSON.parse(savedEpisode) : null;
-//   });
+export const usePlayer = () => {
+  return useContext(PlayerContext);
+};
 
-//   const [episodes, setEpisodes] = useState([]);
-//   const [currentShowTitle, setCurrentShowTitle] = useState("");
-//   const [show, setShow] = useState(null); // Add show state
+export const PlayerProvider = ({ children }) => {
+  const [currentEpisode, setCurrentEpisode] = useState(null);
+  const [currentShow, setCurrentShow] = useState(null);
+  const audioRef = useRef(null);
 
-//   const playEpisode = (episode) => {
-//     setCurrentEpisode(episode);
-//     setCurrentShowTitle(episode.showTitle);
-//     localStorage.setItem("currentEpisode", JSON.stringify(episode));
-//   };
+  useEffect(() => {
+    if (audioRef.current && currentEpisode) {
+      audioRef.current.src = currentEpisode.file;
+      audioRef.current.play();
+    }
+  }, [currentEpisode]);
 
-//   const updateShows = (data) => {
-//     setShow(data); // Update the show state
-//   };
+  const playEpisode = (episode, show) => {
+    setCurrentEpisode(episode);
+    setCurrentShow(show);
+  };
 
-//   const value = {
-//     currentEpisode,
-//     playEpisode,
-//     episodes,
-//     setEpisodes,
-//     currentShowTitle,
-//     setCurrentShowTitle,
-//     show, // Include show in the context value
-//     updateShows, // Add updateShows function
-//   };
+  const value = {
+    currentEpisode,
+    currentShow,
+    playEpisode,
+    audioRef,
+  };
 
-//   return (
-//     <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>
-//   );
-// };
+  return (
+    <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>
+  );
+};

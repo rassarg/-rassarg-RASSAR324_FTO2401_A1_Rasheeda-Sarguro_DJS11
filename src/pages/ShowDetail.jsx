@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchShowById } from "../utils/api";
 import Loading from "../components/Loading";
+import { usePlayer } from "../components/PlayerContext";
 import "./ShowDetail.css";
 
-const ShowDetails = () => {
+const ShowDetail = () => {
   const { id } = useParams();
   const [show, setShow] = useState(null);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { playEpisode } = usePlayer();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,14 +29,6 @@ const ShowDetails = () => {
 
   const handleSeasonChange = (season) => {
     setSelectedSeason(season);
-    const buttons = document.querySelectorAll(".season-selector button");
-    buttons.forEach((button) => {
-      if (button.textContent === `Season ${season.season}`) {
-        button.classList.add("clicked");
-      } else {
-        button.classList.remove("clicked");
-      }
-    });
   };
 
   if (loading) {
@@ -59,7 +53,7 @@ const ShowDetails = () => {
       <div className="season-selector">
         {show.seasons.map((season) => (
           <button
-            key={`${show.id}-${season.season}`} // Combine show ID and season number for unique keys
+            key={`${show.id}-${season.season}`}
             onClick={() => handleSeasonChange(season)}
             className={season === selectedSeason ? "active" : "inactive"}
           >
@@ -72,10 +66,7 @@ const ShowDetails = () => {
         {selectedSeason.episodes.map((episode, index) => (
           <div key={`${selectedSeason.season}-${index}`} className="episode">
             <h3>{episode.title}</h3>
-            <audio controls>
-              <source src={episode.file} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
+            <button onClick={() => playEpisode(episode, show)}>Play</button>
           </div>
         ))}
       </div>
@@ -83,4 +74,4 @@ const ShowDetails = () => {
   );
 };
 
-export default ShowDetails;
+export default ShowDetail;

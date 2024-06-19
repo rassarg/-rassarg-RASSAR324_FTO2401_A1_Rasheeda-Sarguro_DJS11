@@ -2,8 +2,6 @@
   margin: 0 auto;
   padding: 20px;
   max-width: 800px;
-  /* outline: black;
-  border: 1px solid #000000; */
   font-size: 20px;
   margin-top: 40px;
   margin-bottom: 125px;
@@ -24,38 +22,38 @@
 }
 
 .filter-container label {
-  flex: 1; /* Equal width for all labels */
+  flex: 1;
   margin-right: 10px;
-  margin-bottom: 5px; /* Add space between labels */
+  margin-bottom: 5px;
 }
 
 .filter-container select {
-  flex: 2; /* Equal width for all inputs */
+  flex: 2;
   padding: 5px;
   font-size: 16px;
-  width: 100%; /* Full width on smaller screens */
-  margin-bottom: 10px; /* Add space between inputs */
+  width: 100%;
+  margin-bottom: 10px;
   border-radius: 7px;
   border: 1px solid #000000;
 }
 
 textarea {
-  flex: 2; /* Equal width for all inputs */
+  flex: 2;
   padding: 6px;
   font-size: 16px;
   width: 100%;
   margin-bottom: 10px;
-  border: 1px solid #000000; /* Add a border for styling */
-  border-radius: 7px; /* Add border radius for styling */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  border: 1px solid #000000;
+  border-radius: 7px;
+  box-sizing: border-box;
   overflow-y: hidden;
-  resize: vertical; /* Allow the textarea to grow vertically */
+  resize: vertical;
 }
 textarea::placeholder {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 textarea:focus {
-  outline: none; /* Remove outline when focused */
+  outline: none;
 }
 
 .home-list {

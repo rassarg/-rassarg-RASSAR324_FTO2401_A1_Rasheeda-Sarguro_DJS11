@@ -9,7 +9,7 @@ const Navbar = () => (
       <FaHome />
       <span className="tooltip">Home</span>
     </Link>
-    <h1>PODCAST PLAYGROUND</h1>
+    <h1>✨ PODCAST PLAYGROUND ✨</h1>
     <Link to="/favourites" className="nav-link">
       <FaStar />
       <span className="tooltip">Favourites</span>

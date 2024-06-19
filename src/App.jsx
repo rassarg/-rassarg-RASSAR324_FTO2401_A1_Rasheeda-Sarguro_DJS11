@@ -31,29 +31,30 @@ function App() {
       });
   }, []);
 
-  if (loading) {
-    return (
-      <div className="spinner-container">
-        Loading...
-        <div className="spinner"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className="error">{error}</div>;
-  }
-
   return (
     <BrowserRouter>
       <PlayerProvider>
         <Navbar />
         <AudioPlayer />
-        <Routes>
-          <Route path="/" element={<Home shows={shows} />} />
-          <Route path="/show/:showId" element={<ShowDetail shows={shows} />} />
-          <Route path="/favourites" element={<Favourites />} />
-        </Routes>
+        <div className="content-container">
+          {loading ? (
+            <div className="spinner-container">
+              Loading...
+              <div className="spinner"></div>
+            </div>
+          ) : error ? (
+            <div className="error">{error}</div>
+          ) : (
+            <Routes>
+              <Route path="/" element={<Home shows={shows} />} />
+              <Route
+                path="/show/:showId"
+                element={<ShowDetail shows={shows} />}
+              />
+              <Route path="/favourites" element={<Favourites />} />
+            </Routes>
+          )}
+        </div>
       </PlayerProvider>
     </BrowserRouter>
   );

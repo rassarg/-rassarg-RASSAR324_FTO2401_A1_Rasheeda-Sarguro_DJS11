@@ -1,18 +1,21 @@
-.show-details-container {
-  max-width: 800px;
+.show-details {
+  max-width: auto;
   margin: 0 auto;
   padding: 20px;
 }
 
-.show-details-container h1 {
+.show-details h1 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
 .season-selector {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 5px;
   margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .season-selector button {
@@ -32,23 +35,42 @@
 }
 
 .season-preview img {
-  max-width: 100%;
+  max-width: 40%;
   height: auto;
 }
 
 .episode-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
   gap: 20px;
   list-style-type: none;
-  padding: 0;
+  padding: 20px;
+  border: 5px solid #333;
+  border-radius: 10px;
 }
 
-.episode-item {
-  border: 1px solid #ccc;
-  padding: 10px;
+.episode {
+  padding: 2px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 50px;
 }
 
-.episode-item h3 {
-  margin-bottom: 5px;
+.episode audio {
+  width: 100%;
+  height: 30px;
+}
+@media screen and (max-width: 768px) {
+  .show-details {
+    padding: 0;
+  }
+  .episode-list {
+    gap: 2px;
+    padding: 2px;
+  }
+  .episode {
+    margin: 2px 0;
+    margin-right: 30px;
+  }
 }

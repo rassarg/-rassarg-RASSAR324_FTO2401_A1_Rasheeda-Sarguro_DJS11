@@ -39,17 +39,7 @@ const ShowDetails = () => {
   return (
     <div className="show-details">
       <h1>{show.title}</h1>
-      <div className="season-selector">
-        {show.seasons.map((season) => (
-          <button
-            key={season.id}
-            onClick={() => handleSeasonChange(season)}
-            className={season === selectedSeason ? "active" : ""}
-          >
-            Season {season.number}
-          </button>
-        ))}
-      </div>
+
       <div className="season-preview">
         {selectedSeason && (
           <img
@@ -57,6 +47,17 @@ const ShowDetails = () => {
             alt={`Season ${selectedSeason.number}`}
           />
         )}
+      </div>
+      <div className="season-selector">
+        {show.seasons.map((season) => (
+          <button
+            key={season.id}
+            onClick={() => handleSeasonChange(season)}
+            className={season === selectedSeason ? "active" : ""}
+          >
+            Season {season.season}
+          </button>
+        ))}
       </div>
       <div className="episode-list">
         {selectedSeason.episodes.map((episode) => (

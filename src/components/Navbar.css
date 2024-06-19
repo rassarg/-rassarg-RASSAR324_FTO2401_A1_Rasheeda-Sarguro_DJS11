@@ -1,10 +1,15 @@
 .navbar {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   padding: 10px 20px;
   background-color: #333;
   color: white;
+}
+
+.navbar-title {
+  margin-bottom: 10px; /* Adjust as needed */
 }
 
 .navbar h1 {
@@ -12,8 +17,15 @@
   font-size: 1.5rem;
 }
 
+.nav-icons {
+  display: flex;
+}
+
 .nav-link {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; /* Adjust as needed */
   color: white;
   text-decoration: none;
   padding: 5px;
@@ -33,4 +45,14 @@
   color: white;
   padding: 5px;
   border-radius: 5px;
+}
+
+.nav-link:last-child {
+  margin-right: 0; /* Remove margin from the last icon */
+}
+
+@media screen and (max-width: 375px) {
+  .navbar h1 {
+    font-size: 0.9rem;
+  }
 }

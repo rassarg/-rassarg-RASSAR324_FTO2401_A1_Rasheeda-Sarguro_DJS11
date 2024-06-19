@@ -2,10 +2,10 @@
   margin: 0 auto;
   padding: 20px;
   max-width: 800px;
-  outline: black;
-  border: 1px solid #000000;
+  /* outline: black;
+  border: 1px solid #000000; */
   font-size: 20px;
-  margin-top: 70px;
+  margin-top: 40px;
   margin-bottom: 125px;
 }
 
@@ -161,5 +161,9 @@ a:hover {
 
   .filter-container label {
     white-space: nowrap;
+  }
+
+  .home-container h1 {
+    font-size: 2rem;
   }
 }

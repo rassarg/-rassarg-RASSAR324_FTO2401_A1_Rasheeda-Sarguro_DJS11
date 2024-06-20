@@ -1,6 +1,7 @@
 import React from "react";
 import { usePlayer } from "./PlayerContext";
 import Loading from "./Loading";
+import Error from "./Error";
 import "./Player.css";
 
 const Player = () => {
@@ -14,7 +15,7 @@ const Player = () => {
   } = usePlayer();
 
   if (error) {
-    return <div className="error">{error}</div>;
+    return <Error message={error} />;
   }
 
   return (

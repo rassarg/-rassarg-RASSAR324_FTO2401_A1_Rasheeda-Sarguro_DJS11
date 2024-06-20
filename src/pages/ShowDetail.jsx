@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchShowById } from "../utils/api";
 import Loading from "../components/Loading";
+import Error from "../components/Error";
 import { usePlayer } from "../components/PlayerContext";
 import "./ShowDetail.css";
 
@@ -47,9 +48,7 @@ const ShowDetail = () => {
   }
   if (error || !show) {
     return (
-      <div className="error">
-        There was an error fetching show details. Please try again later.
-      </div>
+      <Error message="There was an error fetching show details. Please try again later." />
     );
   }
 

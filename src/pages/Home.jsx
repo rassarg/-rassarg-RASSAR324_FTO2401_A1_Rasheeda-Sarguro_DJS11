@@ -3,6 +3,7 @@ import "./Home.css";
 import { NavLink } from "react-router-dom";
 import { fetchPreviews, genreMapping } from "../utils/api";
 import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 const Home = () => {
   const [shows, setShows] = useState([]); // State to store the fetched shows
@@ -77,7 +78,7 @@ const Home = () => {
   }
 
   if (error || !shows) {
-    return <div className="error">{error}</div>;
+    return <Error message={error || "No shows found."} />;
   }
 
   return (

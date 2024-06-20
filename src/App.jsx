@@ -18,13 +18,13 @@ function App() {
     <PlayerProvider>
       <BrowserRouter>
         <Navbar />
-        <div className="content-container">
-          <Routes>
-            <Route path="/" element={<MemoizedHome />} />
-            <Route path="/show/:id" element={<MemoizedShowDetail />} />
-            <Route path="/favourites" element={<MemoizedFavourites />} />
-          </Routes>
-        </div>
+
+        <Routes>
+          <Route path="/" element={<MemoizedHome />} />
+          <Route path="/show/:id" element={<MemoizedShowDetail />} />
+          <Route path="/favourites" element={<MemoizedFavourites />} />
+        </Routes>
+
         <Player />
       </BrowserRouter>
     </PlayerProvider>

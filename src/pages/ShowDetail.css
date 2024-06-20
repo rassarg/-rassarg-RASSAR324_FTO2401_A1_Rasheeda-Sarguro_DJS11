@@ -1,11 +1,6 @@
-body {
-  padding: 0;
-  margin: 0;
-}
 .show-details {
-  max-width: auto;
-  margin: 0 auto;
-  padding-left: 60px;
+  margin: 20px auto;
+  padding: 30px 80px;
   margin-bottom: 100px;
   text-align: center;
   position: relative;
@@ -173,6 +168,7 @@ body {
   list-style-type: none;
   margin-bottom: 50px;
   padding-bottom: 20px;
+  overflow: hidden;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   font-size: 15px;
@@ -231,6 +227,7 @@ body {
 
   .episode-list {
     flex-direction: column;
+
     overflow-y: auto;
     overflow-x: visible;
     scroll-snap-type: y mandatory;
@@ -240,11 +237,6 @@ body {
     margin: 2px 0;
     margin-right: 20px;
   }
-
-  /* .show-info {
-    flex-direction: column;
-    text-align: center;
-  } */
 
   .show-description {
     flex: initial;

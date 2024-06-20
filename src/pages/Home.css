@@ -132,13 +132,13 @@ a:hover {
 
 @media screen and (max-width: 670px) {
   .filter-container {
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: column;
     align-items: center;
   }
 
   .filter-container > div {
-    width: calc(50% - 5px); /* Half the width with margin */
-    margin-right: 10px; /* Adjust margin between items */
+    width: calc(50% - 5px);
+    margin-right: 10px;
   }
 
   .filter-container select {

@@ -95,9 +95,12 @@ const ShowDetail = () => {
             &#8592; Back to Show
           </button>
           <h1 className="show-title">{show.title}</h1>
-          <div className="image-container">
-            <img src={show.image} alt={show.title} className="show-image" />
-          </div>
+          <img
+            src={selectedSeason.image}
+            alt={show.title}
+            className="show-image"
+          />
+
           <div className="show-info"></div>
           <h2 className="episodes-heading">
             Episodes in Season {selectedSeason.season}:
@@ -139,7 +142,11 @@ const ShowDetail = () => {
         <div>
           <h1 className="show-title">{show.title}</h1>
           <div className="image-container">
-            <img src={show.image} alt={show.title} className="show-image" />
+            <img
+              src={show.seasons[0].image}
+              alt={show.title}
+              className="show-image"
+            />
           </div>
           <div className="show-info">
             <p className="show-description">{show.description}</p>

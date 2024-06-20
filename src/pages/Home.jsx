@@ -127,7 +127,11 @@ const Home = () => {
         {filteredShows.map((show) => (
           <li key={show.id} className="home-list-item">
             <NavLink to={`/show/${show.id}`} className="a">
-              <img className="season-image" src={show.image} alt={show.title} />
+              <img
+                className="season-image"
+                src={show.seasons[0].image}
+                alt={show.title}
+              />
               <h3 className="show-title">{show.title}</h3>
               <span className="show-seasons">
                 <strong>Seasons: </strong>

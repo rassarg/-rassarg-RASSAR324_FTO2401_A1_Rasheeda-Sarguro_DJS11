@@ -219,6 +219,15 @@
   color: white;
   border: 2px solid #ffffff;
 }
+.FavouriteButton {
+  color: black;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.FavouriteButton.clicked {
+  color: gold;
+}
 
 @media screen and (max-width: 768px) {
   .show-details {

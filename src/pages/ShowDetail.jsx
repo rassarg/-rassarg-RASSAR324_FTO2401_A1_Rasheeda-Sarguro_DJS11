@@ -4,6 +4,7 @@ import { fetchShowById } from "../utils/api";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import { usePlayer } from "../components/PlayerContext";
+import FavouriteButton from "../components/FavouriteButton";
 import "./ShowDetail.css";
 import { useClickedButton } from "../hooks/useClickedButton";
 import { useSelectedSeason } from "../hooks/useSelectedSeason";
@@ -16,6 +17,7 @@ const ShowDetail = () => {
   const { playEpisode } = usePlayer();
   const { selectedSeason, setSelectedSeason } = useSelectedSeason();
   const { clickedButton, setClickedButton } = useClickedButton();
+  const [favouriteEpisodes, setFavouriteEpisodes] = useState([]);
 
   // Fetch show data when component mounts or 'id' parameter changes
   useEffect(() => {
@@ -44,6 +46,18 @@ const ShowDetail = () => {
   const handleButtonClick = (episode, show, season, index) => {
     playEpisode(episode, show, season);
     setClickedButton(index);
+  };
+
+  // Toggle favorite episode
+  const toggleFavorite = (episode) => {
+    const index = favouriteEpisodes.findIndex((ep) => ep.id === episode.id);
+    if (index === -1) {
+      setFavouriteEpisodes([...favouriteEpisodes, episode]);
+    } else {
+      const updatedFavourites = [...favouriteEpisodes];
+      updatedFavourites.splice(index, 1);
+      setFavouriteEpisodes(updatedFavourites);
+    }
   };
 
   if (loading) {
@@ -80,7 +94,8 @@ const ShowDetail = () => {
                 className="episode"
               >
                 <h3>
-                  {episode.episode}. {episode.title}
+                  {episode.episode}. {episode.title}{" "}
+                  <FavouriteButton onToggle={() => toggleFavorite(episode)} />
                 </h3>
                 <button
                   className={`episode-play-button ${

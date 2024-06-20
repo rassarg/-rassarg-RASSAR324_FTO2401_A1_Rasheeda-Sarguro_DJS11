@@ -1,16 +1,75 @@
-.notification {
-  opacity: 0;
-  transition: opacity 0.5s;
+.favourites-container {
+  padding: 40px;
+  margin-bottom: 40px;
 }
 
-.notification.show {
-  opacity: 1;
-  position: fixed;
-  bottom: 50%;
-  right: 50%;
-  background-color: #f0ad4e;
+.favourites-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+
+.favourites-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.favourite-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.favourite-index {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.favourite-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.favourite-details {
+  flex-grow: 1;
+}
+
+.favourite-show,
+.favourite-title,
+.favourite-season {
+  margin-left: 5px;
+}
+
+.remove-button {
+  background-color: #aa2504;
   color: white;
-  padding: 10px;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 20px;
+  cursor: pointer;
   border-radius: 5px;
-  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+  background-color: #eed7d7;
+  border: 2px solid #aa2504;
+  color: black;
+}
+
+.remove-button:active {
+  background-color: #b26856;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.no-favourites {
+  font-size: 18px;
+  color: #555;
 }

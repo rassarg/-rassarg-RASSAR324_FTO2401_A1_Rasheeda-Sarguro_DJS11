@@ -59,6 +59,7 @@ const ShowDetail = () => {
     const index = favouriteEpisodes.findIndex((ep) => ep.id === episodeId);
     const episodeData = {
       id: episodeId,
+      showName: show.title,
       title: episode.title,
       season: season.season,
       image: show.image,
@@ -112,6 +113,7 @@ const ShowDetail = () => {
                   <FavouriteButton
                     onToggle={() => toggleFavorite(index, selectedSeason)}
                     episodeData={{
+                      showName: show.title,
                       id: `${show.id}-${selectedSeason.season}-${index}`,
                       title: episode.title,
                       season: selectedSeason.season,

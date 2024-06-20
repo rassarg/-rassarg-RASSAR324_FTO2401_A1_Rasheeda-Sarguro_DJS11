@@ -95,7 +95,10 @@ const ShowDetail = () => {
               >
                 <h3>
                   {episode.episode}. {episode.title}{" "}
-                  <FavouriteButton onToggle={() => toggleFavorite(episode)} />
+                  <FavouriteButton
+                    onToggle={() => toggleFavorite(index)}
+                    uniqueId={`${selectedSeason.season}-${index}`}
+                  />
                 </h3>
                 <button
                   className={`episode-play-button ${

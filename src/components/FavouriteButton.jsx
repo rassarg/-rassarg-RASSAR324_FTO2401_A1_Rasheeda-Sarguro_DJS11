@@ -1,12 +1,23 @@
 // FavouriteButton.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const FavouriteButton = ({ onToggle }) => {
-  const [isFavourite, setIsFavourite] = useState(false);
+const FavouriteButton = ({ onToggle, uniqueId }) => {
+  const [isFavourite, setIsFavourite] = useState(
+    localStorage.getItem(`favourite-${uniqueId}`) === "true"
+  );
+
+  useEffect(() => {
+    localStorage.setItem(`favourite-${uniqueId}`, isFavourite);
+  }, [isFavourite, uniqueId]);
 
   const toggleFavourite = () => {
     setIsFavourite(!isFavourite);
     onToggle();
+    console.log(
+      `Episode ${uniqueId} ${
+        isFavourite ? "removed from" : "added to"
+      } favorites`
+    );
   };
 
   return (

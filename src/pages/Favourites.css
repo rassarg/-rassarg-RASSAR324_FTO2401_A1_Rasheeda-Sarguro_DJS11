@@ -55,8 +55,12 @@ body {
 .favourite-title,
 .favourite-season {
   margin-left: 5px;
+  color: #ffffff;
 }
-
+.season-title {
+  font-size: 17px;
+  color: #5c5b5b;
+}
 .remove-button {
   background-color: #aa2504;
   color: white;

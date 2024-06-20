@@ -1,4 +1,3 @@
-// Favourites.jsx
 import React from "react";
 import { useFavourites } from "../context/FavouritesContext";
 import "./Favourites.css";
@@ -6,39 +5,68 @@ import "./Favourites.css";
 const Favourites = () => {
   const { favouriteEpisodes, removeFavourite } = useFavourites();
 
+  // Function to group episodes by show and season
+  const groupEpisodes = (episodes) => {
+    const grouped = {};
+
+    episodes.forEach((episode) => {
+      const { showName, season } = episode;
+      if (!grouped[showName]) {
+        grouped[showName] = {};
+      }
+      if (!grouped[showName][season]) {
+        grouped[showName][season] = [];
+      }
+      grouped[showName][season].push(episode);
+    });
+
+    return grouped;
+  };
+
+  // Group the favourite episodes
+  const groupedEpisodes = groupEpisodes(favouriteEpisodes);
+
+  let globalIndex = 0;
+
   return (
-    <div className="favourites-container">
+    <div>
       <h1 className="favourites-title">Favourites</h1>
       {favouriteEpisodes.length > 0 ? (
         <ol className="favourites-list">
-          {favouriteEpisodes.map((episode, index) => (
-            <li key={episode.id} className="favourite-item">
-              <span className="favourite-index">{index + 1}.</span>
-              <img
-                src={episode.image}
-                alt={episode.title}
-                width="50"
-                className="favourite-image"
-              />
-              <div className="favourite-details">
-                <span className="favourite-show">{episode.showName} - </span>
-                <br />
-                <span className="favourite-title">{episode.title}</span>
-                <br />
-                <small>
-                  <span className="favourite-season">
-                    Season: {episode.season}
-                  </span>
-                </small>
-              </div>
-              <button
-                className="remove-button"
-                onClick={() => removeFavourite(episode.id)}
-              >
-                Remove
-              </button>
-            </li>
-          ))}
+          {Object.keys(groupedEpisodes).map((showName) =>
+            Object.keys(groupedEpisodes[showName]).map((season) => (
+              <React.Fragment key={`${showName}-${season}`}>
+                <li className="group-header">
+                  <h2 className="season-title">
+                    {showName} - Season {season}
+                  </h2>
+                </li>
+                {groupedEpisodes[showName][season].map((episode) => {
+                  globalIndex += 1;
+                  return (
+                    <li key={episode.id} className="favourite-item">
+                      <span className="favourite-index">{globalIndex}.</span>
+                      <img
+                        src={episode.image}
+                        alt={episode.title}
+                        width="50"
+                        className="favourite-image"
+                      />
+                      <div className="favourite-details">
+                        <span className="favourite-title">{episode.title}</span>
+                      </div>
+                      <button
+                        className="remove-button"
+                        onClick={() => removeFavourite(episode.id)}
+                      >
+                        Remove
+                      </button>
+                    </li>
+                  );
+                })}
+              </React.Fragment>
+            ))
+          )}
         </ol>
       ) : (
         <p className="no-favourites">Nothing added yet!</p>

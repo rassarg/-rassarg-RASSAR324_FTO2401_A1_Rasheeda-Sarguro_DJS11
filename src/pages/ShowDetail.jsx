@@ -5,15 +5,17 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 import { usePlayer } from "../components/PlayerContext";
 import "./ShowDetail.css";
+import { useClickedButton } from "../hooks/useClickedButton";
+import { useSelectedSeason } from "../hooks/useSelectedSeason";
 
 const ShowDetail = () => {
   const { id } = useParams();
   const [show, setShow] = useState(null);
-  const [selectedSeason, setSelectedSeason] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { playEpisode } = usePlayer();
-  const [clickedButton, setClickedButton] = useState(null);
+  const { selectedSeason, setSelectedSeason } = useSelectedSeason();
+  const { clickedButton, setClickedButton } = useClickedButton();
 
   // Fetch show data when component mounts or 'id' parameter changes
   useEffect(() => {
@@ -37,6 +39,7 @@ const ShowDetail = () => {
     setSelectedSeason(season);
     setClickedButton(null);
   };
+
   // Handle episode button click
   const handleButtonClick = (episode, show, season, index) => {
     playEpisode(episode, show, season);

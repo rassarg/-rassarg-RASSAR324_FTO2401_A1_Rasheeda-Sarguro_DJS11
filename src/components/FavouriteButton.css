@@ -1,0 +1,22 @@
+.favourite-button {
+  cursor: pointer;
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.favourite-button.gold {
+  color: gold;
+}
+
+.notification {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 15px;
+  color: #aa2504;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.notification.show {
+  opacity: 1;
+}

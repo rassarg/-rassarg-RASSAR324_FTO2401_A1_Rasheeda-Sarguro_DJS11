@@ -1,8 +1,10 @@
+// pages/ShowDetail.jsx
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchShowById } from "../utils/api";
 import Loading from "../components/Loading";
 import { usePlayer } from "../components/PlayerContext";
+import { useFavourites } from "../components/FavouritesList";
 import "./ShowDetail.css";
 
 const ShowDetail = () => {
@@ -11,9 +13,9 @@ const ShowDetail = () => {
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [loading, setLoading] = useState(true);
   const { playEpisode } = usePlayer();
+  const { addFavourite } = useFavourites();
   const [clickedButton, setClickedButton] = useState(null);
 
-  // Fetch show data when component mounts or 'id' parameter changes
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,15 +30,18 @@ const ShowDetail = () => {
     fetchData();
   }, [id]);
 
-  // Handle season change
   const handleSeasonChange = (season) => {
     setSelectedSeason(season);
     setClickedButton(null);
   };
-  // Handle episode button click
+
   const handleButtonClick = (episode, show, season, index) => {
     playEpisode(episode, show, season);
     setClickedButton(index);
+  };
+
+  const handleAddFavourite = (episode, show, season) => {
+    addFavourite(episode, show, season);
   };
 
   if (loading) {
@@ -83,6 +88,14 @@ const ShowDetail = () => {
                 >
                   Play
                 </button>
+                <button
+                  className="episode-fav-button"
+                  onClick={() =>
+                    handleAddFavourite(episode, show, selectedSeason)
+                  }
+                >
+                  Add to Favourites
+                </button>
               </div>
             ))}
           </div>
@@ -113,4 +126,5 @@ const ShowDetail = () => {
     </div>
   );
 };
+
 export default ShowDetail;

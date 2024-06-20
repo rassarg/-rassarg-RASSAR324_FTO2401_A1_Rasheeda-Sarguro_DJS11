@@ -1,5 +1,5 @@
 import React from "react";
-import { usePlayer } from "./PlayerContext";
+import { usePlayer } from "../context/PlayerContext";
 import Loading from "./Loading";
 import Error from "./Error";
 import "./Player.css";

@@ -6,7 +6,8 @@ import ShowDetail from "./pages/ShowDetail";
 import Favourites from "./pages/Favourites";
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
-import { PlayerProvider } from "./components/PlayerContext";
+import { FavouritesProvider } from "./context/FavouritesContext";
+import { PlayerProvider } from "./context/PlayerContext";
 import "./App.css";
 
 // Memoized components
@@ -17,17 +18,19 @@ const MemoizedFavourites = React.memo(Favourites);
 function App() {
   return (
     <PlayerProvider>
-      <BrowserRouter>
-        <Navbar />
+      <FavouritesProvider>
+        <BrowserRouter>
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<MemoizedHome />} />
-          <Route path="/show/:id" element={<MemoizedShowDetail />} />
-          <Route path="/favourites" element={<MemoizedFavourites />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<MemoizedHome />} />
+            <Route path="/show/:id" element={<MemoizedShowDetail />} />
+            <Route path="/favourites" element={<MemoizedFavourites />} />
+          </Routes>
 
-        <Player />
-      </BrowserRouter>
+          <Player />
+        </BrowserRouter>
+      </FavouritesProvider>
     </PlayerProvider>
   );
 }

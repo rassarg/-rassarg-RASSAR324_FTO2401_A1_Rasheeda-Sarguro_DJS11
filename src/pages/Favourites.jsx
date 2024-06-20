@@ -1,20 +1,8 @@
 import React from "react";
+import { useFavourites } from "../context/FavouritesContext";
 
 const Favourites = () => {
-  const favouriteEpisodes =
-    JSON.parse(localStorage.getItem("favouriteEpisodes")) || [];
-
-  const removeFavourite = (episodeId) => {
-    const updatedFavourites = favouriteEpisodes.filter(
-      (episode) => episode.id !== episodeId
-    );
-    localStorage.setItem(
-      "favouriteEpisodes",
-      JSON.stringify(updatedFavourites)
-    );
-    localStorage.setItem(`favourite-${episodeId}`, false);
-    window.location.reload(); // Reload to reflect changes
-  };
+  const { favouriteEpisodes, removeFavourite } = useFavourites();
 
   return (
     <div>

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchShowById } from "../utils/api";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
-import { usePlayer } from "../components/PlayerContext";
+import { usePlayer } from "../context/PlayerContext";
 import FavouriteButton from "../components/FavouriteButton";
 import "./ShowDetail.css";
 import { useClickedButton } from "../hooks/useClickedButton";

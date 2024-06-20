@@ -1,52 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./FavouriteButton.css";
+import { useFavourites } from "../context/FavouritesContext";
 
-const FavouriteButton = ({ onToggle, episodeData }) => {
-  const [isFavourite, setIsFavourite] = useState(false);
+const FavouriteButton = ({ episodeData }) => {
+  const { addFavourite, removeFavourite, isFavourite } = useFavourites();
+  const [isFavouriteState, setIsFavouriteState] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
 
   useEffect(() => {
-    // Check the favourite status from localStorage when the component mounts or episodeData changes
-    setIsFavourite(
-      localStorage.getItem(`favourite-${episodeData.id}`) === "true"
-    );
-  }, [episodeData]);
+    setIsFavouriteState(isFavourite(episodeData.id));
+  }, [isFavourite, episodeData.id]);
 
   const toggleFavourite = () => {
-    const newIsFavourite = !isFavourite; // Determine the new favourite status
-    setIsFavourite(newIsFavourite); // Update the favourite state
-    onToggle(); // Trigger the parent component's toggle handler
-
-    // Retrieve the list of favourite episodes from localStorage
-    let favouriteEpisodes =
-      JSON.parse(localStorage.getItem("favouriteEpisodes")) || [];
-    const episodeIndex = favouriteEpisodes.findIndex(
-      (episode) => episode.id === episodeData.id
-    );
-
-    // Add or remove the episode from the favourites list based on the new status & set notification message
-    if (newIsFavourite) {
-      if (episodeIndex === -1) {
-        favouriteEpisodes.push(episodeData);
-      }
-      setNotificationMessage("Added to favourites!");
-      // console.log("Added to favourites:", episodeData);
-    } else {
-      favouriteEpisodes = favouriteEpisodes.filter(
-        (episode) => episode.id !== episodeData.id
-      );
+    if (isFavouriteState) {
+      removeFavourite(episodeData.id);
       setNotificationMessage("Removed from favourites!");
-      // console.log("Removed from favourites:", episodeData);
+    } else {
+      addFavourite(episodeData);
+      setNotificationMessage("Added to favourites!");
     }
 
-    // Update localStorage
-    localStorage.setItem(
-      "favouriteEpisodes",
-      JSON.stringify(favouriteEpisodes)
-    );
-    localStorage.setItem(`favourite-${episodeData.id}`, newIsFavourite);
-
+    setIsFavouriteState(!isFavouriteState);
     setShowNotification(true);
     setTimeout(() => {
       setShowNotification(false);
@@ -55,7 +30,7 @@ const FavouriteButton = ({ onToggle, episodeData }) => {
 
   return (
     <span
-      className={`favourite-button ${isFavourite ? "gold" : ""}`}
+      className={`favourite-button ${isFavouriteState ? "gold" : ""}`}
       onClick={toggleFavourite}
     >
       &#9734;

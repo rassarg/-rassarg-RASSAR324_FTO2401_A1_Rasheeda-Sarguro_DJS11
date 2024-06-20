@@ -4,8 +4,18 @@ import Loading from "./Loading";
 import "./Player.css";
 
 const Player = () => {
-  const { audioRef, currentEpisode, currentShow, currentSeason, loading } =
-    usePlayer();
+  const {
+    audioRef,
+    currentEpisode,
+    currentShow,
+    currentSeason,
+    loading,
+    error,
+  } = usePlayer();
+
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
 
   return (
     <div className="player">

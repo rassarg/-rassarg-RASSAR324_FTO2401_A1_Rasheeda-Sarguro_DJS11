@@ -76,7 +76,7 @@ const Home = () => {
     return <Loading />;
   }
 
-  if (error) {
+  if (error || !shows) {
     return <div className="error">{error}</div>;
   }
 

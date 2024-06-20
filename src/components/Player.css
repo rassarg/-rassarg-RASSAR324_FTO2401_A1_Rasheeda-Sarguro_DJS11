@@ -51,6 +51,13 @@
   color: #eed7d7;
   font-size: 16px;
 }
+
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 425px) {
   .player {
     flex-direction: column;

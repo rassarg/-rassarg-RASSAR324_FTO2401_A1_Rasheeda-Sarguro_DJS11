@@ -20,6 +20,7 @@ export const PlayerProvider = ({ children }) => {
   const [currentShow, setCurrentShow] = useState(null); // Currently selected show
   const [currentSeason, setCurrentSeason] = useState(null); // Currently selected season
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null); // Error state
   const audioRef = useRef(null); // Reference to the audio element
 
   // Effect to update the audio source and play the episode when the current episode changes
@@ -32,15 +33,24 @@ export const PlayerProvider = ({ children }) => {
 
   // Function to simulate loading and start playing the selected episode
   const playEpisode = (episode, show, season) => {
-    setLoading(true);
-    setCurrentEpisode(null);
-    setCurrentShow(show);
-    setCurrentSeason(season);
+    try {
+      setLoading(true);
+      setCurrentEpisode(null);
+      setCurrentShow(show);
+      setCurrentSeason(season);
+      setError(null);
 
-    setTimeout(() => {
-      setCurrentEpisode(episode);
+      setTimeout(() => {
+        setCurrentEpisode(episode);
+        setLoading(false);
+      }, 1000); // Simulate loading delay for demonstration purposes
+    } catch (err) {
+      console.error("Error playing episode:", err);
+      setError(
+        "An error occurred while playing the episode. Please try again."
+      );
       setLoading(false);
-    }, 1000); // Simulate loading delay
+    }
   };
 
   // Value object to provide in the context
@@ -51,6 +61,7 @@ export const PlayerProvider = ({ children }) => {
     playEpisode,
     audioRef,
     loading,
+    error,
   };
 
   // Provide the player context to the children

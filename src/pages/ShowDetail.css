@@ -219,6 +219,11 @@
   color: white;
   border: 2px solid #ffffff;
 }
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
 
 @media screen and (max-width: 768px) {
   .show-details {

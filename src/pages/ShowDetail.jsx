@@ -48,16 +48,30 @@ const ShowDetail = () => {
     setClickedButton(index);
   };
 
-  // Toggle favorite episode
-  const toggleFavorite = (episode) => {
-    const index = favouriteEpisodes.findIndex((ep) => ep.id === episode.id);
+  // Toggle favourite episode
+  const toggleFavorite = (episodeIndex, season) => {
+    if (!season) {
+      console.error("No season selected.");
+      return;
+    }
+    const episode = selectedSeason.episodes[episodeIndex];
+    const episodeId = `${show.id}-${season.season}-${episode.episode}`;
+    const index = favouriteEpisodes.findIndex((ep) => ep.id === episodeId);
+    const episodeData = {
+      id: episodeId,
+      title: episode.title,
+      season: season.season,
+      image: show.image,
+      message: "Added to favourites!",
+    };
     if (index === -1) {
-      setFavouriteEpisodes([...favouriteEpisodes, episode]);
+      setFavouriteEpisodes([...favouriteEpisodes, episodeData]);
     } else {
       const updatedFavourites = [...favouriteEpisodes];
       updatedFavourites.splice(index, 1);
       setFavouriteEpisodes(updatedFavourites);
     }
+    console.log("Toggled favourite:", episodeData);
   };
 
   if (loading) {
@@ -96,8 +110,13 @@ const ShowDetail = () => {
                 <h3>
                   {episode.episode}. {episode.title}{" "}
                   <FavouriteButton
-                    onToggle={() => toggleFavorite(index)}
-                    uniqueId={`${selectedSeason.season}-${index}`}
+                    onToggle={() => toggleFavorite(index, selectedSeason)}
+                    episodeData={{
+                      id: `${show.id}-${selectedSeason.season}-${index}`,
+                      title: episode.title,
+                      season: selectedSeason.season,
+                      image: show.image,
+                    }}
                   />
                 </h3>
                 <button

@@ -1,9 +1,14 @@
+body {
+  padding: 0;
+  margin: 0;
+}
 .show-details {
   max-width: auto;
   margin: 0 auto;
-  padding: 20px;
+  padding-left: 60px;
   margin-bottom: 100px;
   text-align: center;
+  position: relative;
 }
 
 .show-details h1 {
@@ -21,7 +26,8 @@
   height: auto;
   max-height: 500px;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: visible;
+  scroll-snap-type: y mandatory;
 }
 .show-info::-webkit-scrollbar {
   width: 10px;
@@ -40,9 +46,8 @@
   height: auto;
   max-height: 200px;
 }
-
-.image-container {
-  flex: 0 0 auto;
+.show-title {
+  margin-top: 20px;
 }
 
 .season-image {
@@ -61,10 +66,14 @@
   border: 2px solid #aa2504;
   border-radius: 5px;
   padding: 10px 20px;
-  margin-top: 20px;
-  font-size: 15px;
+  content: "\2190";
+  font-size: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, width 0.3s, font-size 0.3s;
+  position: fixed;
+  left: 10px;
+  top: 55%;
+  z-index: 1000;
 }
 
 .back-button:hover {
@@ -85,9 +94,9 @@
   font-size: 12px;
 }
 
-.back-button.inactive {
+/* .back-button.inactive {
   padding: 10px 20px;
-}
+} */
 
 .season-selector {
   display: flex;
@@ -147,29 +156,10 @@
   height: auto;
 }
 
-.episode-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
-  gap: 20px;
-  list-style-type: none;
-  padding: 20px;
-  margin-bottom: 190px;
-}
-
-.episode-list .episode button {
-  display: block;
-  margin-top: 5px;
-}
-
-.episodes-heading {
-  grid-column: 1 / -1;
-  text-align: center;
-  text-decoration: underline;
-  text-underline-offset: 8px;
-}
-
 .episode {
   padding: 2px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
   font-size: 14px;
   display: flex;
   flex-direction: column;
@@ -177,12 +167,36 @@
   align-items: center;
   text-align: center;
 }
+.episode-list {
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  font-size: 15px;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: wheat;
+  color: black;
+}
+
+.episode-list .episode button {
+  display: block;
+  margin-top: 5px;
+}
+.episodes-heading {
+  margin-top: 20px;
+  font-size: 24px;
+}
 
 .episode-play-button {
   background-color: #eed7d7;
   border: 2px solid #aa2504;
   border-radius: 5px;
-  padding: 12px 50px;
+  padding: 12px 30px;
   max-width: auto;
   text-align: center;
   text-decoration: none;
@@ -216,8 +230,10 @@
   }
 
   .episode-list {
-    gap: 2px;
-    padding: 2px;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: visible;
+    scroll-snap-type: y mandatory;
   }
 
   .episode {
@@ -225,10 +241,10 @@
     margin-right: 20px;
   }
 
-  .show-info {
+  /* .show-info {
     flex-direction: column;
     text-align: center;
-  }
+  } */
 
   .show-description {
     flex: initial;
@@ -238,5 +254,15 @@
   .season-image {
     max-width: 80%;
     margin: 0 auto;
+  }
+  .back-button {
+    padding: 3px 5px;
+    font-size: 0;
+    width: 50px;
+  }
+
+  .back-button::before {
+    content: "\2190";
+    font-size: 30px;
   }
 }

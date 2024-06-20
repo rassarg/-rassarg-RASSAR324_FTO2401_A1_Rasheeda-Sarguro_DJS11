@@ -61,10 +61,10 @@ const ShowDetail = () => {
             <img src={show.image} alt={show.title} className="show-image" />
           </div>
           <div className="show-info"></div>
+          <h2 className="episodes-heading">
+            Episodes in Season {selectedSeason.season}:
+          </h2>
           <div className="episode-list">
-            <h2 className="episodes-heading">
-              Episodes in Season {selectedSeason.season}:
-            </h2>
             {selectedSeason.episodes.map((episode, index) => (
               <div
                 key={`${selectedSeason.season}-${index}`}

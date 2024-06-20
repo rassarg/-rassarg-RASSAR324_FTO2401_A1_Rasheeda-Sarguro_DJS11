@@ -12,6 +12,7 @@ const Favourites = () => {
       "favouriteEpisodes",
       JSON.stringify(updatedFavourites)
     );
+    localStorage.setItem(`favourite-${episodeId}`, false);
     window.location.reload(); // Reload to reflect changes
   };
 

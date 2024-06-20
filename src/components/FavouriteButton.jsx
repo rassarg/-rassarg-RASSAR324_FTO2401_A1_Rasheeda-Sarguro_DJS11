@@ -2,25 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./FavouriteButton.css";
 
 const FavouriteButton = ({ onToggle, episodeData }) => {
-  // Initialize state to check if the episode is a favourite
-  const [isFavourite, setIsFavourite] = useState(
-    localStorage.getItem(`favourite-${episodeData.id}`) === "true"
-  );
-  // State to handle the visibility of the notification
+  const [isFavourite, setIsFavourite] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-  // State to store the notification message
   const [notificationMessage, setNotificationMessage] = useState("");
 
-  // Effect to synchronize localStorage with the favourite state
   useEffect(() => {
-    localStorage.setItem(`favourite-${episodeData.id}`, isFavourite);
-  }, [isFavourite, episodeData.id]);
+    // Check the favourite status from localStorage when the component mounts or episodeData changes
+    setIsFavourite(
+      localStorage.getItem(`favourite-${episodeData.id}`) === "true"
+    );
+  }, [episodeData]);
 
-  // Function to toggle the favourite status of the episode
   const toggleFavourite = () => {
     const newIsFavourite = !isFavourite; // Determine the new favourite status
     setIsFavourite(newIsFavourite); // Update the favourite state
-    onToggle();
+    onToggle(); // Trigger the parent component's toggle handler
 
     // Retrieve the list of favourite episodes from localStorage
     let favouriteEpisodes =
@@ -49,6 +45,7 @@ const FavouriteButton = ({ onToggle, episodeData }) => {
       "favouriteEpisodes",
       JSON.stringify(favouriteEpisodes)
     );
+    localStorage.setItem(`favourite-${episodeData.id}`, newIsFavourite);
 
     setShowNotification(true);
     setTimeout(() => {

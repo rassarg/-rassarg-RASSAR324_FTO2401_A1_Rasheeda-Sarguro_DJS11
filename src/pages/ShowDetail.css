@@ -10,33 +10,93 @@
   font-size: 24px;
   margin-bottom: 20px;
 }
+
 .show-info {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 20px;
+  max-width: auto;
+  margin: 0 auto;
+  height: auto;
+  max-height: 500px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.show-info::-webkit-scrollbar {
+  width: 10px;
+}
+
+.show-info::-webkit-scrollbar-thumb {
+  background-color: wheat;
+  border-radius: 5px;
+}
+
+.show-info::-webkit-scrollbar-track {
+  background-color: #f5ac26;
+}
+.show-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
 }
 
 .image-container {
-  flex: 1;
+  flex: 0 0 auto;
 }
 
 .season-image {
   max-width: 100%;
   height: auto;
+  max-height: 200px;
 }
 
 .show-description {
-  flex: 2;
   text-align: left;
+  max-width: 70%;
 }
+
+.back-button {
+  background-color: #eed7d7;
+  border: 2px solid #aa2504;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #aa2504;
+  color: white;
+}
+
+.back-button:active {
+  background-color: #b26856;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.back-button.active {
+  background-color: #bfbcbc;
+  color: #333;
+  border: 2px solid #ffffff;
+  font-size: 12px;
+}
+
+.back-button.inactive {
+  padding: 10px 20px;
+}
+
 .season-selector {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
   justify-content: center;
   align-items: center;
+  padding-bottom: 50px;
 }
 
 .season-selector button {
@@ -54,6 +114,7 @@
   background-color: #aa2504;
   color: white;
 }
+
 .season-selector button:active {
   background-color: #b26856;
   color: #ffffff;
@@ -70,11 +131,13 @@
 .season-selector button.inactive {
   padding: 10px 20px;
 }
+
 .season-selector button.clicked {
   background-color: #b26856;
   color: white;
   border: 2px solid #ffffff;
 }
+
 .season-preview {
   margin-bottom: 20px;
 }
@@ -111,7 +174,6 @@
   display: flex;
   flex-direction: column;
   margin: 10px;
-
   align-items: center;
   text-align: center;
 }
@@ -135,29 +197,34 @@
   background-color: #aa2504;
   color: white;
 }
+
 .episode-play-button:active {
   background-color: #b26856;
   color: #ffffff;
   border: 2px solid #ffffff;
 }
+
 .episode-play-button.clicked {
   background-color: #b26856;
   color: white;
   border: 2px solid #ffffff;
 }
+
 @media screen and (max-width: 768px) {
   .show-details {
     padding: 0;
   }
+
   .episode-list {
     gap: 2px;
     padding: 2px;
-    /* margin-bottom: 120px; */
   }
+
   .episode {
     margin: 2px 0;
     margin-right: 20px;
   }
+
   .show-info {
     flex-direction: column;
     text-align: center;

@@ -1,6 +1,6 @@
-.favourites-container {
-  padding: 40px;
-  margin-bottom: 40px;
+body {
+  padding: 0;
+  margin: 10px 20px;
 }
 
 .favourites-title {
@@ -13,7 +13,12 @@
 .favourites-list {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin-bottom: 10px;
+  overflow: hidden;
+  overflow-y: visible;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: start;
+  max-height: 350px;
 }
 
 .favourite-item {
@@ -22,11 +27,15 @@
   margin-bottom: 10px;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
 }
 
 .favourite-index {
   font-weight: bold;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .favourite-image {
@@ -39,7 +48,9 @@
 .favourite-details {
   flex-grow: 1;
 }
-
+.favourite-show {
+  font-weight: bold;
+}
 .favourite-show,
 .favourite-title,
 .favourite-season {
@@ -52,6 +63,7 @@
   border: none;
   padding: 5px 10px;
   margin-left: 20px;
+  margin-right: 10px;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s ease;

@@ -21,11 +21,15 @@ const Favourites = () => {
                 className="favourite-image"
               />
               <div className="favourite-details">
-                <span className="favourite-show">{episode.showName}</span>
+                <span className="favourite-show">{episode.showName} - </span>
+                <br />
                 <span className="favourite-title">{episode.title}</span>
-                <span className="favourite-season">
-                  Season: {episode.season}
-                </span>
+                <br />
+                <small>
+                  <span className="favourite-season">
+                    Season: {episode.season}
+                  </span>
+                </small>
               </div>
               <button
                 className="remove-button"

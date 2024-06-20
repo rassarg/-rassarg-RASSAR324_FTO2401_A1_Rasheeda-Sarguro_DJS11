@@ -33,7 +33,7 @@ const FavouriteButton = ({ episodeData }) => {
       className={`favourite-button ${isFavouriteState ? "gold" : ""}`}
       onClick={toggleFavourite}
     >
-      &#9734;
+      {isFavouriteState ? "⭐" : "☆"}
       <span className={`notification ${showNotification ? "show" : ""}`}>
         {notificationMessage}
       </span>

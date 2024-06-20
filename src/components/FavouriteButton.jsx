@@ -1,51 +1,50 @@
 import React, { useState, useEffect } from "react";
 import "./FavouriteButton.css";
-import { useSelectedSeason } from "../hooks/useSelectedSeason";
 
 const FavouriteButton = ({ onToggle, episodeData }) => {
+  // Initialize state to check if the episode is a favourite
   const [isFavourite, setIsFavourite] = useState(
     localStorage.getItem(`favourite-${episodeData.id}`) === "true"
   );
+  // State to handle the visibility of the notification
   const [showNotification, setShowNotification] = useState(false);
+  // State to store the notification message
   const [notificationMessage, setNotificationMessage] = useState("");
 
+  // Effect to synchronize localStorage with the favourite state
   useEffect(() => {
     localStorage.setItem(`favourite-${episodeData.id}`, isFavourite);
+  }, [isFavourite, episodeData.id]);
 
-    if (isFavourite) {
-      const hasShownNotification = localStorage.getItem(
-        `notification-shown-${episodeData.id}`
-      );
-      if (!hasShownNotification) {
-        setNotificationMessage("Added to favourites!");
-        setShowNotification(true);
-        localStorage.setItem(`notification-shown-${episodeData.id}`, "true");
-        setTimeout(() => {
-          setShowNotification(false);
-        }, 1000); // Show notification for 1 second
-        console.log("Added to favourites:", episodeData);
-      }
-    }
-  }, [isFavourite, episodeData]);
-
+  // Function to toggle the favourite status of the episode
   const toggleFavourite = () => {
-    setIsFavourite(!isFavourite);
+    const newIsFavourite = !isFavourite; // Determine the new favourite status
+    setIsFavourite(newIsFavourite); // Update the favourite state
     onToggle();
 
+    // Retrieve the list of favourite episodes from localStorage
     let favouriteEpisodes =
       JSON.parse(localStorage.getItem("favouriteEpisodes")) || [];
     const episodeIndex = favouriteEpisodes.findIndex(
       (episode) => episode.id === episodeData.id
     );
 
-    if (isFavourite) {
+    // Add or remove the episode from the favourites list based on the new status & set notification message
+    if (newIsFavourite) {
+      if (episodeIndex === -1) {
+        favouriteEpisodes.push(episodeData);
+      }
+      setNotificationMessage("Added to favourites!");
+      // console.log("Added to favourites:", episodeData);
+    } else {
       favouriteEpisodes = favouriteEpisodes.filter(
         (episode) => episode.id !== episodeData.id
       );
-    } else {
-      favouriteEpisodes.push(episodeData);
+      setNotificationMessage("Removed from favourites!");
+      // console.log("Removed from favourites:", episodeData);
     }
 
+    // Update localStorage
     localStorage.setItem(
       "favouriteEpisodes",
       JSON.stringify(favouriteEpisodes)
@@ -54,7 +53,7 @@ const FavouriteButton = ({ onToggle, episodeData }) => {
     setShowNotification(true);
     setTimeout(() => {
       setShowNotification(false);
-    }, 1000); // Show notification for 1 second
+    }, 1000);
   };
 
   return (

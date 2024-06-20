@@ -1,0 +1,16 @@
+.notification {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.notification.show {
+  opacity: 1;
+  position: fixed;
+  bottom: 50%;
+  right: 50%;
+  background-color: #f0ad4e;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+}

@@ -71,7 +71,7 @@ const ShowDetail = () => {
       updatedFavourites.splice(index, 1);
       setFavouriteEpisodes(updatedFavourites);
     }
-    console.log("Toggled favourite:", episodeData);
+    // console.log("Toggled favourite:", episodeData);
   };
 
   if (loading) {

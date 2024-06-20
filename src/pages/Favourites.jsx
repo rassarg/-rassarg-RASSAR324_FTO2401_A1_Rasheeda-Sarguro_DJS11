@@ -4,6 +4,17 @@ const Favourites = () => {
   const favouriteEpisodes =
     JSON.parse(localStorage.getItem("favouriteEpisodes")) || [];
 
+  const removeFavourite = (episodeId) => {
+    const updatedFavourites = favouriteEpisodes.filter(
+      (episode) => episode.id !== episodeId
+    );
+    localStorage.setItem(
+      "favouriteEpisodes",
+      JSON.stringify(updatedFavourites)
+    );
+    window.location.reload(); // Reload to reflect changes
+  };
+
   return (
     <div>
       <h1>Favourites</h1>
@@ -13,6 +24,9 @@ const Favourites = () => {
             <li key={episode.id}>
               <img src={episode.image} alt={episode.title} width="50" />
               {episode.title} - Season: {episode.season}
+              <button onClick={() => removeFavourite(episode.id)}>
+                Remove
+              </button>
             </li>
           ))}
         </ul>

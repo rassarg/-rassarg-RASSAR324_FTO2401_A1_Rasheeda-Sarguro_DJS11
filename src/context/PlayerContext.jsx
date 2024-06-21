@@ -19,6 +19,9 @@ export const PlayerProvider = ({ children }) => {
   const [currentEpisode, setCurrentEpisode] = useState(null); // Currently playing episode
   const [currentShow, setCurrentShow] = useState(null); // Currently selected show
   const [currentSeason, setCurrentSeason] = useState(null); // Currently selected season
+  const [completedEpisodes, setCompletedEpisodes] = useState(() => {
+    return JSON.parse(localStorage.getItem("completedEpisodes")) || [];
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null); // Error state
   const audioRef = useRef(null); // Reference to the audio element
@@ -28,6 +31,17 @@ export const PlayerProvider = ({ children }) => {
     if (audioRef.current && currentEpisode) {
       audioRef.current.src = currentEpisode.file; // Set the audio source to the episode file
       audioRef.current.play(); // Play the audio
+
+      // Add event listener to detect when the episode ends
+      const handleEnded = () => {
+        markEpisodeAsCompleted(currentEpisode);
+      };
+      audioRef.current.addEventListener("ended", handleEnded);
+
+      // Cleanup event listener on component unmount or when currentEpisode changes
+      return () => {
+        audioRef.current.removeEventListener("ended", handleEnded);
+      };
     }
   }, [currentEpisode]);
 
@@ -53,6 +67,16 @@ export const PlayerProvider = ({ children }) => {
     }
   };
 
+  // Function to mark an episode as completed
+  const markEpisodeAsCompleted = (episode) => {
+    const updatedCompletedEpisodes = [...completedEpisodes, episode];
+    setCompletedEpisodes(updatedCompletedEpisodes);
+    localStorage.setItem(
+      "completedEpisodes",
+      JSON.stringify(updatedCompletedEpisodes)
+    );
+  };
+
   // Value object to provide in the context
   const value = {
     currentEpisode,
@@ -62,6 +86,7 @@ export const PlayerProvider = ({ children }) => {
     audioRef,
     loading,
     error,
+    completedEpisodes, // Provide completedEpisodes in the context
   };
 
   // Provide the player context to the children

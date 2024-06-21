@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCompletedEpisodes } from "../context/CompletedEpisodesContext";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 import "./CompletedEpisodes.css";
 
 const CompletedEpisodes = () => {
@@ -8,7 +10,14 @@ const CompletedEpisodes = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(false);
+    try {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    } catch (err) {
+      setError("Failed to load completed episodes.");
+      setLoading(false);
+    }
   }, []);
 
   const groupEpisodes = (episodes) => {
@@ -33,11 +42,11 @@ const CompletedEpisodes = () => {
   let globalIndex = 0;
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
-    return <div className="error">{error}</div>;
+    return <Error message={error} />;
   }
 
   return (

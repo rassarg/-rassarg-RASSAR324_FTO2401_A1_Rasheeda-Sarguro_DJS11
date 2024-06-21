@@ -72,4 +72,4 @@ export const fetchAndMapGenres = async () => {
 export const { title, description, seasons } = showsData;
 export const previews = previewsData;
 export const genres = genreData;
-export { genreMapping }; // Export genreMapping
+export { genreMapping };

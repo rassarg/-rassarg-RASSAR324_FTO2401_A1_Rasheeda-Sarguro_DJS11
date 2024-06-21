@@ -40,7 +40,9 @@ export const PlayerProvider = ({ children }) => {
 
       // Cleanup event listener on component unmount or when currentEpisode changes
       return () => {
-        audioRef.current.removeEventListener("ended", handleEnded);
+        if (audioRef.current) {
+          audioRef.current.removeEventListener("ended", handleEnded);
+        }
       };
     }
   }, [currentEpisode]);
@@ -69,7 +71,15 @@ export const PlayerProvider = ({ children }) => {
 
   // Function to mark an episode as completed
   const markEpisodeAsCompleted = (episode) => {
-    const updatedCompletedEpisodes = [...completedEpisodes, episode];
+    const updatedCompletedEpisodes = [
+      ...completedEpisodes,
+      {
+        ...episode,
+        showName: currentShow.title,
+        season: currentSeason.season,
+        image: currentSeason.image,
+      },
+    ];
     setCompletedEpisodes(updatedCompletedEpisodes);
     localStorage.setItem(
       "completedEpisodes",

@@ -13,6 +13,7 @@ import Player from "./components/Player";
 // Context providers
 import { FavouritesProvider } from "./context/FavouritesContext";
 import { PlayerProvider } from "./context/PlayerContext";
+import { CompletedEpisodesProvider } from "./context/CompletedEpisodesContext"; // Import the CompletedEpisodesProvider
 
 // Memoized components
 const MemoizedHome = React.memo(Home);
@@ -24,21 +25,23 @@ function App() {
   return (
     <PlayerProvider>
       <FavouritesProvider>
-        <BrowserRouter>
-          <Navbar />
+        <CompletedEpisodesProvider>
+          <BrowserRouter>
+            <Navbar />
 
-          <Routes>
-            <Route path="/" element={<MemoizedHome />} />
-            <Route path="/show/:id" element={<MemoizedShowDetail />} />
-            <Route path="/favourites" element={<MemoizedFavourites />} />
-            <Route
-              path="/completed-episodes"
-              element={<MemoizedCompletedEpisodes />}
-            />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<MemoizedHome />} />
+              <Route path="/show/:id" element={<MemoizedShowDetail />} />
+              <Route path="/favourites" element={<MemoizedFavourites />} />
+              <Route
+                path="/completed-episodes"
+                element={<MemoizedCompletedEpisodes />}
+              />
+            </Routes>
 
-          <Player />
-        </BrowserRouter>
+            <Player />
+          </BrowserRouter>
+        </CompletedEpisodesProvider>
       </FavouritesProvider>
     </PlayerProvider>
   );

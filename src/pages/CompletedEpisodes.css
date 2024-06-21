@@ -1,2 +1,77 @@
-.completed-episodes-page {
+body {
+  padding: 0;
+  margin: 10px 20px;
+}
+
+.completed-episodes-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+
+.completed-episodes-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 10px;
+  overflow: hidden;
+  overflow-y: visible;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: start;
+  max-height: 350px;
+}
+
+.completed-episode-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.completed-episode-index {
+  font-weight: bold;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.completed-episode-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.completed-episode-details {
+  flex-grow: 1;
+}
+
+.completed-episode-show {
+  font-weight: bold;
+}
+
+.completed-episode-show,
+.completed-episode-title,
+.completed-episode-season {
+  margin-left: 5px;
+  color: #ffffff;
+}
+
+.season-title {
+  font-size: 17px;
+  color: #5c5b5b;
+}
+
+.no-completed-episodes {
+  font-size: 18px;
+  color: #555;
+}
+
+.loading,
+.error {
+  font-size: 18px;
+  color: #555;
 }

@@ -89,10 +89,6 @@
   font-size: 12px;
 }
 
-/* .back-button.inactive {
-  padding: 10px 20px;
-} */
-
 .season-selector {
   display: flex;
   flex-wrap: wrap;
@@ -177,6 +173,7 @@
   border-radius: 5px;
   background-color: wheat;
   color: black;
+  max-height: 200px;
 }
 
 .episode-list .episode button {
@@ -255,14 +252,25 @@
     max-width: 80%;
     margin: 0 auto;
   }
-  .back-button {
-    padding: 3px 5px;
-    font-size: 0;
-    width: 50px;
+}
+@media screen and (max-width: 540px) {
+  .episode-list {
+    max-height: 200px;
   }
-
+  .show-image {
+    width: 70px;
+  }
+  .episodes-heading {
+    font-size: 15px;
+  }
   .back-button::before {
     content: "\2190";
     font-size: 30px;
+  }
+  .back-button {
+    top: 20%;
+    padding: 3px 5px;
+    font-size: 0;
+    width: 50px;
   }
 }

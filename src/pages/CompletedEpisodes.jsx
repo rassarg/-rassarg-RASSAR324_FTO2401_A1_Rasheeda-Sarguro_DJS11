@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useCompletedEpisodes } from "../context/CompletedEpisodesContext";
 import "./CompletedEpisodes.css";
 
 const CompletedEpisodes = () => {
-  const [completedEpisodes, setCompletedEpisodes] = useState([]);
+  const { completedEpisodes, clearCompletedEpisodes } = useCompletedEpisodes();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    try {
-      const storedEpisodes =
-        JSON.parse(localStorage.getItem("completedEpisodes")) || [];
-      console.log("Stored Episodes: ", storedEpisodes); // Debugging line
-      setCompletedEpisodes(storedEpisodes);
-      setLoading(false);
-    } catch (err) {
-      setError("Failed to load completed episodes.");
-      setLoading(false);
-    }
+    setLoading(false);
   }, []);
 
   const groupEpisodes = (episodes) => {
@@ -51,12 +43,21 @@ const CompletedEpisodes = () => {
   return (
     <div>
       <h1 className="completed-episodes-title">Completed Episodes</h1>
+      <button
+        className={`clear-button ${
+          completedEpisodes.length === 0 ? "disabled" : ""
+        }`}
+        onClick={completedEpisodes.length === 0 ? null : clearCompletedEpisodes}
+        disabled={completedEpisodes.length === 0}
+      >
+        Clear All
+      </button>
       {completedEpisodes.length > 0 ? (
         <ol className="completed-episodes-list">
           {Object.keys(groupedEpisodes).map((showName) =>
             Object.keys(groupedEpisodes[showName]).map((season) => (
               <React.Fragment key={`${showName}-${season}`}>
-                <li className="group-header">
+                <li>
                   <h2 className="season-title">
                     {showName} - Season {season}
                   </h2>

@@ -24,9 +24,19 @@ export const CompletedEpisodesProvider = ({ children }) => {
     return completedEpisodes.some((episode) => episode.id === episodeId);
   };
 
+  const clearCompletedEpisodes = () => {
+    setCompletedEpisodes([]);
+    localStorage.removeItem("completedEpisodes");
+  };
+
   return (
     <CompletedEpisodesContext.Provider
-      value={{ completedEpisodes, saveCompletedEpisode, isEpisodeCompleted }}
+      value={{
+        completedEpisodes,
+        saveCompletedEpisode,
+        isEpisodeCompleted,
+        clearCompletedEpisodes,
+      }}
     >
       {children}
     </CompletedEpisodesContext.Provider>

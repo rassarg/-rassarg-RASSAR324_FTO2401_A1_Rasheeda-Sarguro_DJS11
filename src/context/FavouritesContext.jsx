@@ -18,7 +18,6 @@ export const FavouritesProvider = ({ children }) => {
       "favouriteEpisodes",
       JSON.stringify(updatedFavourites)
     );
-    localStorage.setItem(`favourite-${episode.id}`, true);
   };
 
   const removeFavourite = (episodeId) => {
@@ -30,7 +29,6 @@ export const FavouritesProvider = ({ children }) => {
       "favouriteEpisodes",
       JSON.stringify(updatedFavourites)
     );
-    localStorage.setItem(`favourite-${episodeId}`, false);
   };
 
   const isFavourite = (episodeId) => {

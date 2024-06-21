@@ -62,7 +62,7 @@ const ShowDetail = () => {
       showName: show.title,
       title: episode.title,
       season: season.season,
-      image: show.image,
+      image: selectedSeason.image,
       message: "Added to favourites!",
     };
     if (index === -1) {
@@ -120,7 +120,7 @@ const ShowDetail = () => {
                       id: `${show.id}-${selectedSeason.season}-${index}`,
                       title: episode.title,
                       season: selectedSeason.season,
-                      image: show.image,
+                      image: selectedSeason.image,
                     }}
                   />
                 </h3>

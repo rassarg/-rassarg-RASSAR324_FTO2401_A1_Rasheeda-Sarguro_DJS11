@@ -16,20 +16,20 @@ export const usePlayer = () => {
 
 // Provider component to wrap the application and provide the player context
 export const PlayerProvider = ({ children }) => {
-  const [currentEpisode, setCurrentEpisode] = useState(null); // Currently playing episode
-  const [currentShow, setCurrentShow] = useState(null); // Currently selected show
-  const [currentSeason, setCurrentSeason] = useState(null); // Currently selected season
+  const [currentEpisode, setCurrentEpisode] = useState(null);
+  const [currentShow, setCurrentShow] = useState(null);
+  const [currentSeason, setCurrentSeason] = useState(null);
   const [completedEpisodes, setCompletedEpisodes] = useState(() => {
     return JSON.parse(localStorage.getItem("completedEpisodes")) || [];
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null); // Error state
-  const audioRef = useRef(null); // Reference to the audio element
+  const [error, setError] = useState(null);
+  const audioRef = useRef(null);
 
   // Effect to update the audio source and play the episode when the current episode changes
   useEffect(() => {
     if (audioRef.current && currentEpisode) {
-      audioRef.current.src = currentEpisode.file; // Set the audio source to the episode file
+      audioRef.current.src = currentEpisode.file;
       audioRef.current.play(); // Play the audio
 
       // Add event listener to detect when the episode ends
@@ -46,6 +46,22 @@ export const PlayerProvider = ({ children }) => {
       };
     }
   }, [currentEpisode]);
+
+  // Effect to handle preventing user from closing page while audio is playing
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (audioRef.current && !audioRef.current.paused) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [audioRef]);
 
   // Function to simulate loading and start playing the selected episode
   const playEpisode = (episode, show, season) => {
@@ -87,7 +103,7 @@ export const PlayerProvider = ({ children }) => {
     );
   };
 
-  // Value object to provide in the context
+  // Value to provide in the context
   const value = {
     currentEpisode,
     currentShow,
@@ -96,10 +112,9 @@ export const PlayerProvider = ({ children }) => {
     audioRef,
     loading,
     error,
-    completedEpisodes, // Provide completedEpisodes in the context
+    completedEpisodes,
   };
 
-  // Provide the player context to the children
   return (
     <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>
   );

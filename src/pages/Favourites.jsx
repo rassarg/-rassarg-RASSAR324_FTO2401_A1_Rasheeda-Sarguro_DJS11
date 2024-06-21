@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFavourites } from "../context/FavouritesContext";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 import "./Favourites.css";
 
 const Favourites = () => {
   const { favouriteEpisodes, removeFavourite } = useFavourites();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Simulate fetching data
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000); // Simulate a delay of 1 second
+      } catch (err) {
+        setError("Failed to load favourites.");
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // Function to group episodes by show and season
   const groupEpisodes = (episodes) => {
@@ -27,6 +48,14 @@ const Favourites = () => {
   const groupedEpisodes = groupEpisodes(favouriteEpisodes);
 
   let globalIndex = 0;
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error message={error} />;
+  }
 
   return (
     <div>

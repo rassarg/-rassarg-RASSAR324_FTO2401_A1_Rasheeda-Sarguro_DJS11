@@ -1,22 +1,7 @@
-// Map of genre IDs to genre names
-export const genreMapping = {
-  1: "Personal Growth",
-  2: "Investigative Journalism",
-  3: "History",
-  4: "Comedy",
-  5: "Entertainment",
-  6: "Business",
-  7: "Fiction",
-  8: "News",
-  9: "Kids and Family",
-};
-
-// Object to store show data by ID
 let showsData = {};
-// Array to store preview data
 let previewsData = [];
-// Object to store genre data by ID
 let genreData = {};
+let genreMapping = {};
 
 // Function to fetch show details by ID
 export const fetchShowById = async (id) => {
@@ -48,7 +33,7 @@ export const fetchPreviews = async () => {
         };
       })
     );
-    previewsData.sort((a, b) => a.title.localeCompare(b.title)); // alphabetically sort data by title
+    previewsData.sort((a, b) => a.title.localeCompare(b.title)); // Alphabetically sort data by title
     return previewsData;
   } catch (error) {
     console.error("Error fetching previews:", error);
@@ -73,6 +58,18 @@ export const fetchGenre = async (id) => {
   }
 };
 
+// Function to fetch all genres and map them
+export const fetchAndMapGenres = async () => {
+  const genreIds = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // List of genre IDs
+  const promises = genreIds.map(async (id) => {
+    const genre = await fetchGenre(id);
+    genreMapping[id] = genre.title;
+  });
+  await Promise.all(promises);
+  return genreMapping;
+};
+
 export const { title, description, seasons } = showsData;
 export const previews = previewsData;
 export const genres = genreData;
+export { genreMapping }; // Export genreMapping

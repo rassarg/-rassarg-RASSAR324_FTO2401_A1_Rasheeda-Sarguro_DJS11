@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { NavLink } from "react-router-dom";
-import { fetchPreviews, genreMapping } from "../utils/api";
+import { fetchPreviews, fetchAndMapGenres, genreMapping } from "../utils/api";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
@@ -16,20 +16,21 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        await fetchAndMapGenres(); // Fetch and map genres
         const data = await fetchPreviews();
         setShows(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching previews:", error);
+        console.error("Error fetching data:", error);
         setError(
-          "An error occurred while fetching the previews. Please try again later."
+          "An error occurred while fetching the data. Please try again later."
         );
         setLoading(false);
       }
     };
 
     fetchData(); // Call fetchData function
-  }, []); // Dependency array ensure effect runs only once on mount
+  }, []); // Dependency array ensures effect runs only once on mount
 
   // Event handler for genre filter change
   const handleGenreChange = (e) => {

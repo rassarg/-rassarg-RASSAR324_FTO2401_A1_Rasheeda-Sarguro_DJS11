@@ -58,7 +58,7 @@ const Favourites = () => {
   }
 
   return (
-    <div>
+    <div className="favourites-container">
       <h1 className="favourites-title">Favourites</h1>
       {favouriteEpisodes.length > 0 ? (
         <ol className="favourites-list">

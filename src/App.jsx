@@ -2,18 +2,21 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+
 // Pages folder
 import CompletedEpisodes from "./pages/CompletedEpisodes";
+import Favourites from "./pages/Favourites";
 import Home from "./pages/Home";
 import ShowDetail from "./pages/ShowDetail";
-import Favourites from "./pages/Favourites";
+
 // Components folder
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
-// Context providers
+
+// Context providers folder
+import { CompletedEpisodesProvider } from "./context/CompletedEpisodesContext";
 import { FavouritesProvider } from "./context/FavouritesContext";
 import { PlayerProvider } from "./context/PlayerContext";
-import { CompletedEpisodesProvider } from "./context/CompletedEpisodesContext"; // Import the CompletedEpisodesProvider
 
 // Memoized components
 const MemoizedHome = React.memo(Home);

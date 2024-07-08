@@ -38,7 +38,7 @@ export const PlayerProvider = ({ children }) => {
       };
       audioRef.current.addEventListener("ended", handleEnded);
 
-      // Cleanup event listener on component unmount or when currentEpisode changes
+      // Cleanup event listener when component unmounts or when currentEpisode changes
       return () => {
         if (audioRef.current) {
           audioRef.current.removeEventListener("ended", handleEnded);

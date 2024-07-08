@@ -36,6 +36,9 @@ The Podcast App is a React-based application designed for podcast enthusiasts. I
 - **Sort Podcasts:** Users can sort podcasts alphabetically or by the date they were last updated.
 - **Audio Player:** An audio player remains visible and functional across all pages, ensuring uninterrupted playback.
 - **Loading Indicator:** A loading spinner is displayed while data is being fetched.
+- **Favourites:** Users can add and remove specific episodes to their favourites list.
+- **Completed:** Users can see a complete list of all the podcast episodes they've listened to entirely, as well as clear the list of episodes.
+-
 
 ## Contact information:
 

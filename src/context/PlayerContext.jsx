@@ -75,7 +75,7 @@ export const PlayerProvider = ({ children }) => {
       setTimeout(() => {
         setCurrentEpisode(episode);
         setLoading(false);
-      }, 1000); // Simulate loading delay for demonstration purposes
+      }, 200); // Simulate loading delay for demonstration purposes
     } catch (err) {
       console.error("Error playing episode:", err);
       setError(

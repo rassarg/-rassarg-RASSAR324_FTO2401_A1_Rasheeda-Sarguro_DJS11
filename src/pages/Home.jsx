@@ -6,12 +6,12 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 
 const Home = () => {
-  const [shows, setShows] = useState([]); // State to store the fetched shows
-  const [loading, setLoading] = useState(true); // State to manage loading state
-  const [error, setError] = useState(null); // State for error messages
-  const [filter, setFilter] = useState(""); // State for filter text
-  const [genre, setGenre] = useState(""); // State for selected genre
-  const [sortOrder, setSortOrder] = useState("A-Z"); // State for the order sorting
+  const [shows, setShows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [filter, setFilter] = useState("");
+  const [genre, setGenre] = useState("");
+  const [sortOrder, setSortOrder] = useState("A-Z");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,8 +29,8 @@ const Home = () => {
       }
     };
 
-    fetchData(); // Call fetchData function
-  }, []); // Dependency array ensures effect runs only once on mount
+    fetchData();
+  }, []);
 
   // Event handler for genre filter change
   const handleGenreChange = (e) => {
@@ -94,7 +94,7 @@ const Home = () => {
             onChange={handleFilterChange}
             placeholder="Search titles..."
             rows="1"
-            style={{ resize: "none" }} // Prevent the textarea from being resized by the user
+            style={{ resize: "none" }}
           />
         </div>
 

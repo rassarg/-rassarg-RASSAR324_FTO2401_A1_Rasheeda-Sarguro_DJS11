@@ -8,21 +8,26 @@ const CompletedEpisodes = () => {
   const { completedEpisodes, clearCompletedEpisodes } = useCompletedEpisodes();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [localStorageItems, setLocalStorageItems] = useState([]);
 
   useEffect(() => {
     try {
+      const storedCompletedEpisodes =
+        JSON.parse(localStorage.getItem("completedEpisodes")) || [];
+      setLocalStorageItems(storedCompletedEpisodes);
+
       setTimeout(() => {
         setLoading(false);
-      }, 500);
+      }, 200);
     } catch (err) {
       setError("Failed to load completed episodes.");
       setLoading(false);
     }
-  }, []);
+  }, [localStorage.getItem("completedEpisodes")]);
 
+  // Function to group episodes by showName and season
   const groupEpisodes = (episodes) => {
     const grouped = {};
-
     episodes.forEach((episode) => {
       const { showName, season } = episode;
       if (!grouped[showName]) {
@@ -33,11 +38,11 @@ const CompletedEpisodes = () => {
       }
       grouped[showName][season].push(episode);
     });
-
     return grouped;
   };
 
-  const groupedEpisodes = groupEpisodes(completedEpisodes);
+  // Group completed episodes from localStorage
+  const groupedEpisodes = groupEpisodes(localStorageItems);
 
   let globalIndex = 0;
 
@@ -54,14 +59,14 @@ const CompletedEpisodes = () => {
       <h1 className="completed-episodes-title">Completed Episodes</h1>
       <button
         className={`clear-button ${
-          completedEpisodes.length === 0 ? "disabled" : ""
+          localStorageItems.length === 0 ? "disabled" : ""
         }`}
-        onClick={completedEpisodes.length === 0 ? null : clearCompletedEpisodes}
-        disabled={completedEpisodes.length === 0}
+        onClick={localStorageItems.length === 0 ? null : clearCompletedEpisodes}
+        disabled={localStorageItems.length === 0}
       >
         Clear All
       </button>
-      {completedEpisodes.length > 0 ? (
+      {localStorageItems.length > 0 ? (
         <ol className="completed-episodes-list">
           {Object.keys(groupedEpisodes).map((showName) =>
             Object.keys(groupedEpisodes[showName]).map((season) => (

@@ -16,7 +16,7 @@ const Favourites = () => {
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
-        }, 1000); // Simulate a delay of 1 second
+        }, 200);
       } catch (err) {
         setError("Failed to load favourites.");
         setLoading(false);
@@ -29,7 +29,6 @@ const Favourites = () => {
   // Function to group episodes by show and season
   const groupEpisodes = (episodes) => {
     const grouped = {};
-
     episodes.forEach((episode) => {
       const { showName, season } = episode;
       if (!grouped[showName]) {
@@ -40,7 +39,6 @@ const Favourites = () => {
       }
       grouped[showName][season].push(episode);
     });
-
     return grouped;
   };
 

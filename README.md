@@ -17,10 +17,10 @@ This application allows users to browse, search, filter, favourite, and play a v
 The Podcast App is a React-based application designed for podcast enthusiasts. It allows users to:
 
 - Browse a list of available podcasts.
-- Filter podcasts by genre.
-- Search podcasts by title.
-- Sort podcasts alphabetically (A-Z and Z-A) and by the date they were last updated.
+- Filter & search podcasts.
 - Play podcast episodes with a continuously visible audio player.
+- Add and remove episodes from Favourites
+- See what episodes they've listened to entirely and reset this list.
 
 ## Installation:
 

@@ -3,6 +3,9 @@
 Welcome to my Podcast Playgound App! <hr>
 This application allows users to browse, search, filter, favourite, and play a variety of podcasts.
 
+Presentation Slideshow:
+https://docs.google.com/presentation/d/12Vi5CFtVQ3cpsbYwrqqBt2_D-lw3pZbThclrzXjri1I/edit?usp=sharing
+
 ## Table of Contents:
 
 - [🎵 PODCAST APP | PORTFOLIO PIECE 💿](#-podcast-app--portfolio-piece-)
